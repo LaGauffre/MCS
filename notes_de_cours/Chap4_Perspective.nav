@@ -1,0 +1,54 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\beamer@sectionpages {1}{1}}
+\headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\sectionentry {1}{Probl\IeC {\`e}me}{2}{Probl\IeC {\`e}me}{0}}
+\headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\slideentry {1}{0}{1}{2/3}{}{0}}
+\headcommand {\beamer@framepages {2}{3}}
+\headcommand {\beamer@sectionpages {2}{3}}
+\headcommand {\beamer@subsectionpages {2}{3}}
+\headcommand {\sectionentry {2}{Approche fr\IeC {\'e}quentiste}{4}{Approche fr\IeC {\'e}quentiste}{0}}
+\headcommand {\beamer@subsectionpages {4}{3}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{4}{M\IeC {\'e}thode des moments}}
+\headcommand {\slideentry {2}{1}{1}{4/4}{M\IeC {\'e}thode des moments}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {2}{1}{1}{4/5}{M\IeC {\'e}thode des moments}{0}}
+\headcommand {\beamer@framepages {4}{5}}
+\headcommand {\beamer@subsectionpages {4}{5}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{6}{Maximum de vraisemblance}}
+\headcommand {\slideentry {2}{2}{1}{6/6}{Maximum de vraisemblance}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {2}{2}{1}{6/7}{Maximum de vraisemblance}{0}}
+\headcommand {\beamer@framepages {6}{7}}
+\headcommand {\beamer@sectionpages {4}{7}}
+\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\sectionentry {3}{Approche Bay\IeC {\'e}sienne}{8}{Approche Bay\IeC {\'e}sienne}{0}}
+\headcommand {\slideentry {3}{0}{1}{8/8}{}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{9}{Metropolis Hasting}}
+\headcommand {\slideentry {3}{1}{1}{9/9}{Metropolis Hasting}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{10}{Echantilloneur de Gibbs}}
+\headcommand {\slideentry {3}{2}{1}{10/10}{Echantilloneur de Gibbs}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {3}{2}{1}{10/11}{Echantilloneur de Gibbs}{0}}
+\headcommand {\beamer@framepages {10}{11}}
+\headcommand {\beamer@subsectionpages {10}{11}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{12}{Approximate Bayesian Computation}}
+\headcommand {\slideentry {3}{3}{1}{12/12}{Approximate Bayesian Computation}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {3}{3}{1}{12/13}{Approximate Bayesian Computation}{0}}
+\headcommand {\beamer@framepages {12}{13}}
+\headcommand {\slideentry {3}{3}{1}{12/14}{Approximate Bayesian Computation}{0}}
+\headcommand {\beamer@framepages {12}{14}}
+\headcommand {\slideentry {3}{3}{2}{15/15}{Approximate Bayesian Computation}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\beamer@partpages {1}{15}}
+\headcommand {\beamer@subsectionpages {12}{15}}
+\headcommand {\beamer@sectionpages {8}{15}}
+\headcommand {\beamer@documentpages {15}}
+\headcommand {\gdef \inserttotalframenumber {15}}

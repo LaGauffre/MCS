@@ -1,0 +1,306 @@
+\documentclass[11pt,addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2021-2022}
+\def\course{Modélisation Charge Sinistre}
+\def\title{\MakeUppercase{Examen Final}}
+\def\name{Pierre-O Goffard}
+
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item \underline{Document autorisé:} Une feuille manuscrite recto-verso
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+N'hésitez pas à utiliser le résultat des questions précédentes pour répondre à la question courante.
+\begin{questions}
+\question \textbf{Etude de la loi Log-Logistique}\\
+
+Le montant des sinistres est distribué comme une variable aléatoire continue et positive de loi Log-Logistique $U\sim \text{Log-Logistique}(\alpha, \beta)$, avec $\alpha, \beta >0$ de densité donnée par
+$$
+f_{U}(x) =\begin{cases}
+\frac{(\beta / \alpha )(x / \alpha )^{\beta-1}}{[1+(x / \alpha )^\beta]^2},&\text{ pour }x>0,\\
+0,&\text{sinon}.
+\end{cases}
+$$
+\begin{parts}
+\part[1]  Donner l'expression de la fonction de répartition $F_{X}(x)=\mathbb{P}(X\leq x)$ de la loi log-logistique
+\begin{solution}
+on a 
+$$
+F_X(x) = \int_0^x\frac{(\beta / \alpha )(y / \alpha )^{\beta-1}}{[1+(y / \alpha )^\beta]^2}\text{d}y,
+$$
+on obtient
+$
+F_{X}(x)=\frac{x^\beta}{\alpha^\beta+x^\beta},
+$
+après les changement de variables $u = y/\alpha $, puis $v = u^\beta$.
+\end{solution}
+\part[1] Que pensez-vous de la queue de la distribution de $U$?
+\begin{solution}
+$
+F_{X}(x)\sim x^{-\beta},\text{ }x\rightarrow\infty
+$ 
+Il s'agit d'une distribution à queue lourde.
+\end{solution}
+\part[2] Montrer que  
+$$
+\mathbb{E}(X^k) = \alpha^k B(1-k/\beta, 1+k/\beta),\text{ avec }k < \beta,
+$$
+où $B(\cdot, \cdot)$ désigne la fonction Beta définie par 
+$$
+B(a,b) = \int_0^1 x^{a-1}(1-x)^{b-1}\text{d}x,\text{ pour }a,b\in\mathbb{R}.
+$$
+\begin{solution}
+Les mêmes changement de variable que précédemment, puis le changement de variable $z = \frac{1}{1+v}.$
+\end{solution}
+\end{parts}
+\question \textbf{Etude de la loi geometrique-beta}\\
+Soit la variable aléatoire $\Theta\sim \text{Beta}(a, b)$, $a,b>0$ de densité 
+$$
+f_\Theta(\theta) = \frac{\theta^{a-1}(1-\theta)^{b-1}}{B(a,b)},\text{ }\theta\in(0, 1).
+$$ 
+La variable aléatoire $N$ suit une loi geometrique-beta $N\sim\text{Geom}(\Theta)$ avec 
+$$
+\mathbb{P}(N = n|\Theta = \theta) = (1-\theta)\theta^n,\text{ }n\geq0. 
+$$
+\begin{parts}
+\part[1] Donner l'expression de $\mathbb{P}(N = n)$ à l'aide de la fonction beta. 
+\begin{solution}
+$$
+\mathbb{P}(N = n) = \int_{0}^1\mathbb{P}(N = n|\Theta = \theta)f_\Theta(\theta)\text{d}\theta = \frac{B(n+a, b+1)}{B(a,b)}.
+$$
+\end{solution}
+\part[1] Donner l'expression de l'espérance de $N$ à l'aide de la fonction beta. 
+\begin{solution}
+On note que 
+$$
+\mathbb{E}(N) = \mathbb{E}\left[\mathbb{E}(N|\Theta)\right]=)\mathbb{E}\left[\frac{\Theta}{1-\Theta}\right] =\frac{B(a+1,b-1)}{B(a,b)} 
+$$
+\end{solution}
+\part[1] Donner l'expression de la variance de $N$ à l'aide de la fonction beta.\\
+\underline{Indication:} On rappelle le théorème de la variance totale
+$$
+\mathbb{V}(X) = \mathbb{E}(\mathbb{V}(X|Y)) + \mathbb{V}(\mathbb{E}(X|Y)),
+$$
+où $X,Y$ sont deux variable aléatoires avec $\mathbb{V}(X)<\infty$.
+\begin{solution}
+On a d'une part
+$$
+\mathbb{E}(\mathbb{V}(N|\Theta)) = \mathbb{E}\left(\frac{\Theta}{(1-\Theta)^2}\right)=\frac{B(a+1,b-2)}{B(a,b)}
+$$
+et d'autre part
+\begin{eqnarray*}
+\mathbb{V}(\mathbb{E}(N|\Theta)) &=& \mathbb{V}\left(\frac{\Theta}{1-\Theta}\right)\\
+ &=& \mathbb{E}\left[\left(\frac{\Theta}{1-\Theta}\right)^2\right] -  \mathbb{E}\left(\frac{\Theta}{(1-\Theta)}\right)^2\\
+  &=& \frac{B(a+2,b-2)B(a,b) - B(a+1,b-1)^2}{B(a,b)^2}
+\end{eqnarray*}
+On en déduit que 
+$$
+\mathbb{V}(N) = \frac{(B(a+1,b-2) + B(a+2,b-2))B(a,b) - B(a+1,b-1)^2}{B(a,b)^2}.
+$$
+\end{solution}
+\end{parts}
+\question \textbf{Modèle collectif géométrique beta - log logistique}\\
+Soit la variable aléatoire $X$ définie par 
+$$
+X = \sum_{i = 1}^NU_i,
+$$
+où
+\begin{itemize}
+	\item $N$ est une variable aléatoire de comptage de loi géométrique beta $N\sim\text{Geom}(\Theta)$, avec $\Theta\sim\text{Beta}(a,b)$.
+	\item $U_1,\ldots, U_N$ est une suite de variables aléatoires iid de loi $\text{Log-Logistique}(\alpha, \beta)$.
+\end{itemize}
+Les $U_i$ sont indépendants de $N$ et par convention $X =0$ si $N = 0$.
+\begin{parts}
+\part[1] Donner l'interprétation actuarielle de la variable aléatoire $X$
+\begin{solution}
+C'est le modèle collectif, voir le cours
+\end{solution}
+\part[2] Donner l'expression de l'espérance et de la variance de $X$ en fonction de $a,b, \alpha, \beta$ et de la fonction beta.
+\begin{solution}
+On applique les formules du cours avec les expressions trouver aux questions 1 et 2.
+\end{solution}
+\part[3] Donner $3$ méthodes d'approximation de la distribution de $X$. Expliquer la validité et les éventuelles difficultés/limitations associées a leur application dans le cadre du modèle considéré ici.
+\begin{solution}
+\begin{enumerate}
+	\item Approximation normale, la méthode n'est pas valide car $N$ ne suit pas une loi de Poisson. Il est nécessaire que $U$ admette un moment d'ordre $2$ et donc il faut que $\beta >2$.
+	\item Approximation gamma, Il est nécessaire que $U$ admette un moment d'ordre $3$ et donc il faut que $\beta >3$.
+	\item Algorithme de Panjer, La loi de $N$ n'est pas dans la famille de Panjer. Les montant de sinistres ne sont pas continues
+	\item FFT, la transformée de Fourrier n'est pas données sous une forme explicite. La transformée de Fourier de la distribution des montants est une série infinie et la fonction génératrice de probabilité de $N$ est une intégrale indéterminée.
+\end{enumerate}
+\end{solution}
+\end{parts}
+\question[2] \textbf{Un modèle collectif avec dépendance entre montants de sinistres et fréquence des sinistres.}\\ 
+Soit la variable aléatoire $X$ définie par 
+$$
+X = \sum_{i = 1}^NU_i,
+$$
+où
+\begin{itemize}
+	\item $N$ est une variable aléatoire de comptage de loi de Poisson $N\sim\text{Pois}(\lambda)$, avec $\lambda >0$.
+	\item $U_1,\ldots, U_N$ est une suite de variables aléatoires iid conditionnellement à $N$ avec 
+	$$
+	U|N=n\sim\text{Exp}(\delta / n),\text{ }n\geq1
+	$$.
+\end{itemize}
+Par convention $X =0$ si $N = 0$. Calculer $\mathbb{E}(X)$.
+\begin{solution}
+\begin{eqnarray*}
+\mathbb{E}(X)&=&\mathbb{E}\left[\mathbb{E}(X|N)\right]\\
+&=&\mathbb{E}\left[\sum_{i=1}^N\mathbb{E}(U_i|N)\right]\\
+&=&\mathbb{E}\left[\sum_{i=1}^N N/\delta\right]\\
+&=&\mathbb{E}\left[N^2/\delta\right]\\
+&=&\frac{\lambda + \lambda^2}{\delta}\\
+\end{eqnarray*}
+\end{solution}
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomial & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Geometric & $\Geom(p)$ & $(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ & $\frac{pe^t}{1-(1-p)e^t}$ pour  $t<-\ln(1-p)$\\
+\hline
+Uniform & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponential & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Normal & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+% \bibliographystyle{plain}
+% \bibliography{IG_distribution}
+\end{document}

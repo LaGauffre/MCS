@@ -1,0 +1,318 @@
+\documentclass[11pt,addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2021-2022}
+\def\course{Modélisation Charge Sinistre}
+\def\title{\MakeUppercase{Examen de Deuxième Session}}
+\def\name{Pierre-O Goffard}
+
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item \underline{Document autorisé:} Une feuille manuscrite recto-verso
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+N'hésitez pas à utiliser le résultat des questions précédentes pour répondre à la question courante.
+\begin{questions}
+\question \textbf{Etude de la loi Lomax}\\
+
+Le montant des sinistres est distribué comme une variable aléatoire continue et positive de loi Lomax, on note $U\sim \text{Lomax}(\alpha, \sigma)$, avec $\alpha, \sigma >0$ de densité donnée par
+$$
+f_{U}(x) =\begin{cases}
+\frac{\alpha\sigma^\alpha}{(\sigma+ x )^{\alpha + 1}},&\text{ pour }x>0,\\
+0,&\text{sinon}.
+\end{cases}
+$$
+\begin{parts}
+\part[1]  Donner l'expression de la fonction de répartition $F_{U}(x)=\mathbb{P}(X\leq x)$ de la loi Lomax
+\begin{solution}
+on a 
+$$
+F_U(x) = 1-\left(\frac{\sigma}{x+\sigma}\right)^\alpha.
+$$
+\end{solution}
+\part[1] Que pensez-vous de la queue de la distribution de $U$?
+\begin{solution}
+$
+\bar{F}_{U}(x)\sim x^{-\alpha},\text{ }x\rightarrow\infty
+$ 
+Il s'agit d'une distribution à queue lourde.
+\end{solution}
+\part[2] Montrer que $U$ admet une loi exponentielle dont le paramètre suit une loi gamma. Autrement dit, il faut montrer que $U\sim\text{Exp}(\Lambda)$ avec $\Lambda\sim \text{Gamma}(\alpha, \sigma)$. On utilisera la définition des lois exponentielle et gamma fournie dans le tableau en fin d'énoncé.
+\begin{solution}
+Supposons que $U\sim\text{Exp}(\Lambda)$ avec $\Lambda\sim \text{Gamma}(\alpha, \sigma)$ alors on a 
+$$
+f_U(x) = \int_0^{+\infty}\lambda e^{-\lambda x}\frac{\lambda^{\alpha-1}e^{-\sigma\lambda }\sigma^\alpha}{\Gamma(\alpha)}\text{d}\lambda
+$$
+\end{solution}
+% \part[1] Au vu de la remarque précédente, quelle interprétation actuarielle peut-on faire de l'utilisation de loi Lomax pour modéliser le montant des sinistres dans le cadre d'un modèle collectif.  
+% \begin{solution}
+% On suppose que les montants de sinistres suivent une loi exponentielle, le fait de supposer le paramètre aléatoire permet d'incorporer dans le modèle de l'hétérogéneité dans le portefeuille. 
+% \end{solution}
+\part[2] Montrer que  
+$$
+\mathbb{E}(U^k) = \frac{\sigma^k\Gamma(\alpha-k)\Gamma(1+k)}{\Gamma(\alpha)},\text{ pour }k < \alpha,
+$$
+où $\Gamma(\cdot)$ désigne la fonction Gamma définie par 
+$$
+\Gamma(a) = \int_0^\infty x^{a-1}e^{-x}\text{d}x,\text{ pour }a\in\mathbb{R}_+.
+$$
+\underline{Indication:} Le plus simple est d'utiliser l'interprétation de la loi lomax comme une loi exponentielle dont le paramètre suit une loi gamma, voir c). Que vaut $\mathbb{E}(U^k|\Lambda =\lambda)$?
+\begin{solution}
+En utilisant l'indication, on écrit 
+\begin{eqnarray*}
+\mathbb{E}(U^k) &=&\mathbb{E}\left[\mathbb{E}(U^k|\Lambda)\right]\\
+&=&\mathbb{E}\left[\frac{\Gamma(k+1)}{\Lambda^k}\right]\\
+&=&\Gamma(k+1)\int_{0}^{+\infty}\frac{1}{\lambda^k}\frac{e^{-\sigma\lambda}\alpha^\sigma\lambda^{\alpha-1}}{\Gamma(\alpha)}\text{d}\lambda\\
+&=&\frac{\sigma^k\Gamma(k+1)\Gamma(\alpha-k)}{\Gamma(\alpha)}
+\end{eqnarray*}
+\end{solution}
+\end{parts}
+\question \textbf{Etude de la loi Poisson-gamma}\\
+Soit la variable aléatoire $\Theta\sim \text{Gamma}(a, b)$, $a,b>0$ de densité 
+$$
+f_\Theta(\theta) = \frac{\theta^{a-1}e^{-b\theta}b^a}{\Gamma(a)},\text{ }\theta\geq0.
+$$ 
+La variable aléatoire $N$ suit une loi Poisson-gamma $N\sim\text{Pois}(\Theta)$ avec 
+$$
+\mathbb{P}(N = n|\Theta = \theta) = \frac{e^{-\theta}\theta^n }{n!},\text{ }n\geq0. 
+$$
+\begin{parts}
+\part[1] Calculer $\mathbb{E}(N)$ en fonction de $a$ et $b$. 
+\begin{solution}
+On note que 
+$$
+\mathbb{E}(N) = \mathbb{E}\left[\mathbb{E}(N|\Theta)\right]=\mathbb{E}\left[\Theta\right] =\frac{a}{b} 
+$$
+\end{solution}
+\part[1] Calculer $\mathbb{V}(N)$ en fonction de $a$ et $b$.\\
+\underline{Indication:} On rappelle le théorème de la variance totale
+$$
+\mathbb{V}(X) = \mathbb{E}(\mathbb{V}(X|Y)) + \mathbb{V}(\mathbb{E}(X|Y)),
+$$
+où $X,Y$ sont deux variable aléatoires avec $\mathbb{V}(X)<\infty$.
+\begin{solution}
+On a d'une part
+$$
+\mathbb{E}(\mathbb{V}(N|\Theta)) = \mathbb{E}\left(\Theta\right)=\frac{a}{b}
+$$
+et d'autre part
+\begin{eqnarray*}
+\mathbb{V}(\mathbb{E}(N|\Theta)) &=& \mathbb{V}\left(\Theta\right)\\
+ &=& \frac{a}{b^2}
+\end{eqnarray*}
+On en déduit que 
+$$
+\mathbb{V}(N) = \frac{a}{b}+\frac{a}{b^2}.
+$$
+\end{solution}
+
+\part[1] Calculer $\mathbb{P}(N = n)$, en fonction de $a$ et $b$. 
+\begin{solution}
+$$
+\mathbb{P}(N = n) = \int_{0}^\infty\mathbb{P}(N = n|\Theta = \theta)f_\Theta(\theta)\text{d}\theta = \frac{\Gamma(n+\alpha)}{n!\Gamma( \alpha)}\left(\frac{b}{b+1}\right)^a\left(\frac{1}{b+1}\right)^n.
+$$
+Il s'agit d'une loi binomial négative.
+\end{solution}
+\part[1] Quel est l'intérêt d'un tel modèle par rapport à un modèle utilisant simplement la loi de Poisson?
+\begin{solution}
+Voir le cours.
+\end{solution}
+\end{parts}
+\question \textbf{Modèle collectif Poisson gamma - lomax}\\
+Soit la variable aléatoire $X$ définie par 
+$$
+X = \sum_{i = 1}^NU_i,
+$$
+où
+\begin{itemize}
+	\item $N$ est une variable aléatoire de comptage de loi Poisson gamma $N\sim\text{Pois}(\Theta)$, avec $\Theta\sim\text{Gamma}(a,b)$.
+	\item $U_1,\ldots, U_N$ est une suite de variables aléatoires iid de loi $\text{Lomax}(\alpha, \sigma)$.
+\end{itemize}
+Les $U_i$ sont indépendants de $N$ et par convention $X =0$ si $N = 0$.
+\begin{parts}
+\part[1] Donner l'interprétation actuarielle de la variable aléatoire $X$
+\begin{solution}
+C'est le modèle collectif, voir le cours
+\end{solution}
+\part[2] Donner l'expression de l'espérance et de la variance de $X$ en fonction de $a,b, \alpha, \sigma$.
+\begin{solution}
+On applique les formules du cours avec les expressions trouver aux questions 1 et 2.
+$$
+\mathbb{E}(X) = \frac{a}{b}\frac{\sigma}{\alpha-1}
+$$
+et 
+$$
+\mathbb{V}(X) = \frac{a}{b}\frac{\sigma^2\alpha}{(\alpha-1)^2(\alpha-2)}+ \frac{\sigma^2}{(\alpha-1)^2}\frac{a(b+1)}{b^2}
+$$
+\end{solution}
+\part[3] Donner $3$ méthodes d'approximation de la distribution de $X$. Expliquer la validité et les éventuelles difficultés/limitations associées a leur application dans le cadre du modèle considéré ici.
+\begin{solution}
+\begin{enumerate}
+	\item Approximation normale, la méthode n'est pas valide car $N$ ne suit pas une loi de Poisson. Il est nécessaire que $U$ admette un moment d'ordre $2$ et donc il faut que $\alpha >2$.
+	\item Approximation gamma, Il est nécessaire que $U$ admette un moment d'ordre $3$ et donc il faut que $\alpha >3$.
+	\item Algorithme de Panjer, La loi de $N$ est pas dans la famille de Panjer, puisqu'il s'agit de la loi negative binomiale. Les montants de sinistres suivent une loi continue, il faudra donc un calcul approché via une discrétisation de la loi des montants.
+\end{enumerate}
+\end{solution}
+\end{parts}
+
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomial & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Geometric & $\Geom(p)$ & $(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ & $\frac{pe^t}{1-(1-p)e^t}$ pour  $t<-\ln(1-p)$\\
+\hline
+Uniform & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponential & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Gamma & $\text{Gamma}(\alpha,\beta)$ & $\begin{cases} \frac{\beta^\alpha x^{\alpha-1}e^{-\beta t}}{\Gamma(\alpha)} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{\alpha}{\beta}$ & $\dfrac{\alpha}{\beta^2}$ & $\left(\frac{\beta}{\beta -t}\right)^\alpha$ pour $t<\beta$\\
+\hline
+Normal & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+On rappelle la définition de la fonction gamma d'Euler avec 
+$$
+\Gamma(\alpha) = \int_{0}^\infty e^{-x}x^{\alpha-1}\text{d}x,\text{ pour }\alpha>0.
+$$
+et également la propriété suivante
+$$
+\Gamma(\alpha+1) = \alpha\Gamma(\alpha)
+$$
+% \bibliographystyle{plain}
+% \bibliography{IG_distribution}
+\end{document}

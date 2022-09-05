@@ -1,0 +1,67 @@
+\begin{thebibliography}{10}
+
+\bibitem{asmussen2016orthonormal}
+S{\o}ren Asmussen, Pierre-Olivier Goffard, and Patrick~J Laub.
+\newblock Orthonormal polynomial expansions and lognormal sum densities.
+\newblock {\em Risk and Stochastics}, 2019.
+
+\bibitem{asmussen1996fitting}
+S{\o}ren Asmussen, Olle Nerman, and Marita Olsson.
+\newblock Fitting phase-type distributions via the em algorithm.
+\newblock {\em Scandinavian Journal of Statistics}, pages 419--441, 1996.
+
+\bibitem{embrechts2009panjer}
+Paul Embrechts and Marco Frei.
+\newblock Panjer recursion versus fft for compound distributions.
+\newblock {\em Mathematical Methods of Operations Research}, 69(3):497--508,
+  2009.
+
+\bibitem{fenton1960sum}
+Lawrence Fenton.
+\newblock The sum of log-normal probability distributions in scatter
+  transmission systems.
+\newblock {\em IRE Transactions on Communications Systems}, 8(1):57--67, 1960.
+
+\bibitem{Goffard2020}
+Pierre-Olivier Goffard and Patrick~J. Laub.
+\newblock Orthogonal polynomial expansions to evaluate stop-loss premiums.
+\newblock {\em Journal of Computational and Applied Mathematics}, 370:112648,
+  may 2020.
+
+\bibitem{lee2010modeling}
+Simon~CK Lee and X~Sheldon Lin.
+\newblock Modeling and evaluating insurance losses via mixtures of erlang
+  distributions.
+\newblock {\em North American Actuarial Journal}, 14(1):107--130, 2010.
+
+\bibitem{Lo19}
+S.~Loisel.
+\newblock Notes de cours: Mod{\'e}lisation charge sinistre.
+
+\bibitem{Pa81}
+H.~H. Panjer.
+\newblock Recursive evaluation of a family of compound distributions.
+\newblock {\em ASTIN Bulletin}, 12(1):22--26, 1981.
+
+\bibitem{reynkens2017modelling}
+Tom Reynkens, Roel Verbelen, Jan Beirlant, and Katrien Antonio.
+\newblock Modelling censored losses using splicing: A global fit strategy with
+  mixed erlang and extreme value distributions.
+\newblock {\em Insurance: Mathematics and Economics}, 77:65--77, 2017.
+
+\bibitem{scollnik2012modeling}
+David~PM Scollnik and Chenchen Sun.
+\newblock Modeling with weibull-pareto models.
+\newblock {\em North American Actuarial Journal}, 16(2):260--272, 2012.
+
+\bibitem{sundt1981further}
+Bj{\o}rn Sundt and William~S Jewell.
+\newblock Further results on recursive evaluation of compound distributions.
+\newblock {\em ASTIN Bulletin: The Journal of the IAA}, 12(1):27--39, 1981.
+
+\bibitem{tijms1994stochastic}
+Henk~C Tijms and Henk~C Tijms.
+\newblock {\em Stochastic models: an algorithmic approach}, volume 994.
+\newblock John Wiley \& Sons Chichester, 1994.
+
+\end{thebibliography}

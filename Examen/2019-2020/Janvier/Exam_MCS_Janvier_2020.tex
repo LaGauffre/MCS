@@ -1,0 +1,308 @@
+\documentclass[11pt, addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2019-2020}
+\def\course{Modélisation Charge-Sinistre}
+\def\title{\MakeUppercase{Examen Final}}
+\def\name{Pierre-O Goffard}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item Document autorisé: Une feuille recto-verso manuscrite. 
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+\section*{Un modèle collectif mélange Poisson - lognoramle}
+\begin{questions}
+\question[2] Rappeler la définition du modèle collectif, en précisant bien les hypothèses.
+\begin{solution}
+Voir les notes de cours
+\end{solution}
+\question Le montant des sinistres est distribué comme une variable aléatoire continue et positive de loi lognormale $U\sim \text{LN}(\mu, \sigma)$ de densité
+$$
+f_{U}(x) =\begin{cases}
+\frac{1}{x\sigma\sqrt{2\pi} }\exp\left\{-\frac{[\ln(x)-\mu]^2}{2\sigma^2}\right\},&\text{ pour }x>0,\\
+0,&\text{sinon}.
+\end{cases}
+$$
+\begin{parts}
+\part[2] Montrer que les moments de $U$ sont donnés par
+$$
+\E(U^k) =e^{k\mu+k^2\frac{\sigma^2}{2}} ,\text{ }k=0,1,2,\ldots.
+$$
+\begin{solution}
+On a $U = e^{Y}$ avec $Y\sim\mathcal{N}(\mu, \sigma)$ puis
+$$
+\E(U^k) = \E(e^kY)=M_Y(k)=e^{k\mu+k^2\sigma^2/2}
+$$
+\end{solution}
+
+\part[1] Proposer une méthode d'estimation des paramètres de la loi lognormale. Vous donnerez l'expression des estimateurs en supposant que vous disposez d'un échantillon de sinistres $(u_1,\ldots, u_n)$.
+\begin{solution}
+Si on suppose que les données $(u_1,\ldots, u_n)$ sont des observations iid de loi lognormale alors les log données $(\ln(u_1),\ldots, \ln(u_n))$ sont des observations iid de loi normale puis 
+$$
+\widehat{\mu} =\frac{1}{n}\sum_{i=1}^n\ln(u_i)\text{ et }\widehat{\sigma} =\sqrt{\frac{1}{n-1}\sum_{i=1}^n\left[\ln(u_i)-\widehat{\mu}\right]^2}.
+$$ 
+\end{solution}
+\part[1] La loi lognormale est-elle une loi phase-type?
+\begin{solution}
+Non, mais on peut approcher aussi précisément que l'on souhaite sa densité par la limite d'une suite de densité de variable aléatoire distribuées suivant des lois phase type en vertu de la densité des loi phase type au sein des loi de probabilité concentré sur $\mathbb{R}_+$. 
+\end{solution}
+\end{parts}
+\question Le nombre de sinistres $N$ suit une loi de Poisson mélange $N\sim\text{Pois}(\Lambda)$, où $\Lambda$ est une variable aléatoire positive.
+\begin{parts}
+\part[2] Expliquer l'intérêt d'utiliser une loi Poisson mélange plutôt qu'une loi de Poisson standard pour modéliser la fréquence de sinistres.
+\begin{solution}
+Voir le cours
+\end{solution}
+\part[2] On suppose que $\Lambda\sim \text{Gamma}(a,b)$ (cf tableau des distributions en annexe) avec $a,b>0$. Montrer que 
+$$
+\mathbb{P}(N = k) =\frac{\Gamma(a+k)}{\Gamma(k+1)\Gamma(a)}\left(\frac{b}{b+1}\right)^a\left(\frac{1}{b+1}\right)^k ,\text{ pour }k = 0,1,2,\ldots.
+$$
+\begin{solution}
+On a, pour $k\in \mathcal{N},$
+\begin{eqnarray*}
+\mathbb{P}(N = k)&=&\int_{0}^{+\infty}\frac{e^{-\lambda}\lambda^k}{k!}\frac{e^{-b\lambda}\lambda^{a-1}}{\Gamma(a)}\text{d}\lambda\\
+&=&\frac{\Gamma(a+k)}{\Gamma(k+1)\Gamma(a)}\frac{b^a}{(b+1)^{a+k}}
+\int_{0}^{+\infty}\frac{e^{-\lambda(b+1)}(b+1)^{a+k}\lambda^{k+a-1}}{\Gamma(a+k)}\text{d}\lambda\\
+&=&\frac{\Gamma(a+k)}{\Gamma(k+1)\Gamma(a)}\left(\frac{b}{b+1}\right)^a\left(\frac{1}{b+1}\right)^k.
+\end{eqnarray*}
+\end{solution}
+\part[1] Donner la moyenne et la variance de $N$ en fonction de $a$ et $b$.
+\begin{solution}
+On note que $N\sim\mathcal{NB}(a, 1/(b+1))$ ce qui permet de conclure que 
+$$
+\E(N) = \frac{a}{b}\text{ et }\V(N)=\frac{a(b+1)}{b^2}.	
+$$
+\end{solution}
+\part[1] La loi de $N$ appartient-elle à la famille de Panjer?
+\begin{solution}
+Oui car il s'agit de la loi binomiale négative.
+\end{solution}
+\end{parts}
+\question On considère la variable aléatoire 
+$$
+X = \sum_{i = 1}^N U_i,
+$$
+avec $U_1,\ldots, U_N$ des variables aléatoires iid de loi lognormale et indépendante de $N$ qui quant à elle est une variable aléatoire mélange Poisson avec $\Lambda\sim \text{Gamma}(a,b)$.
+\begin{parts}
+\part[2] On fait l'approximation suivante
+$$
+\frac{X-\E(X)}{\sqrt{\mathbb{V}(X)}}\approx \mathcal{N}(0,1)
+$$ 
+Donner l'expression de la fonction de répartition de $X$ en fonction de $\sigma, \mu, a, b$ et $\phi$ la fonction de répartition de la loi normale $\mathcal{N}(0,1)$.
+\begin{solution}
+On utilise les formules du cours pour déterminer la moyenne et la variance de $X$
+$$
+\mathbb{E}(X) = \mathbb{E}(N)\mathbb{E}(U) = \frac{ap}{(1-p)}e^{\mu+\sigma^2/2}
+$$
+et 
+$$
+\mathbb{V}(X) = \mathbb{E}(N)\mathbb{V}(U) + \mathbb{V}(N)\mathbb{E}(U)^2 = \frac{a}{b}(e^{2\mu+2\sigma^2}-e^{2\mu+\sigma^2})  + \frac{a(b+1)}{b^2}e^{2\mu+\sigma^2}
+$$
+La fonction de répartition de $X$ est alors donnée par
+$$
+\mathbb{P}(X\leq x) = \phi\left(\frac{x-\E(X)}{\mathbb{V}(X)}\right)
+$$
+
+\end{solution}
+
+\part[2] Cette approximation est-elle pertinente selon vous? Proposer une méthode alternative (expliquer briévement la mise en place).
+\begin{solution}
+C'est pas idéale car cette approximation fonctionne en théorie lorsque la fréquence des sinitres suit une loi normale. Algo de Panjer/ FFT / Gamma de Bower. 
+\end{solution}
+\end{parts}
+\question On souhaite rafiner le modèle pour le montant des sinistre en combinant la loi lognormale (pour les petits montants) avec une loi de Pareto (pour les montants plus importants) dans un modèle composite. La densité de la loi de Pareto est donnée par 
+$$
+f_{\text{Par}}(x) =\begin{cases}
+\frac{\theta^\alpha\alpha}{x^{\alpha+1}},&x>\theta,\\
+0,&\text{sinon.}
+\end{cases} 
+$$
+\begin{parts}
+\part[2] Rappeler la définition du modèle composite et expliquer son intérêt pour modéliser le montant des sinistres.
+\begin{solution}
+Voir les notes de cours.
+\end{solution}
+\part[2] Les conditions de régularité de la densité $f$ du modèle composite impose de fixer la valeur de certain paramètre. Donner l'expression du paramètre $\mu$ (de la loi lognormale) et du paramètre de mélange $r$ du modèle composite en fonction des autres paramètres $\sigma,\alpha,\theta$ et de la fonction de répartition $\phi$ de la loi normale de moyenne $0$ et de variance $1$. 
+\begin{solution}
+La densité du modèle composite Lognormale-Pareto est donnée par 
+$$
+f(x)=\begin{cases}
+r\frac{f_1(x)}{F_1(\theta)},&x\geq \theta,\\
+(1-r)f_2(x),&x> \theta.
+\end{cases}
+$$
+avec 
+$$
+f_{1}(x) = \frac{1}{\sqrt{2\pi}\sigma x}\exp\left[-\frac{(\ln(x)-\mu)^2}{2\sigma^2}\right]\text{, et }f_{1}'(x)-\frac{f_1(x)}{x}\left(1+\frac{\ln(x)-\mu}{\sigma^2}\right)
+$$
+d'une part et 
+$$
+f_2(x) = \frac{\alpha\theta^\alpha}{x^{\alpha+1}}\text{, et }f_2'(x) =-f_2(x)\frac{\alpha+1}{x} 
+$$
+La continuité en $\theta$ implique que $\frac{r}{1-r} = \frac{f_2(\theta)F_1(\theta)}{f_1(\theta)}$, puis la dérivabilité en $\theta$ équivaut à 
+$$
+\mu=\ln(\theta)-\alpha\sigma^2
+$$
+puis on en déduit
+$$
+r=\frac{f_2(\theta)F_1(\theta)}{f_2(\theta)F_1(\theta)+f_1(\theta)} = \frac{\alpha\sigma\sqrt{2\pi} \Phi(\alpha\sigma)}{\alpha\sigma\sqrt{2\pi} \Phi(\alpha\sigma) + e^{-\alpha^2\sigma^2 / 2}}
+$$
+\end{solution}
+\end{parts}
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomiale & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ pour $k = 0,\ldots,n$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ pour $k = 0,1,2,\ldots$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Binomiale Négative & $\mathcal{NB}(\alpha, p)$ & $\frac{\Gamma(\alpha+k)}{\Gamma(k+1)\Gamma(a)}(1-p)^{\alpha}p^k$ & $\dfrac{\alpha p }{1-p}$ & $\dfrac{\alpha p }{(1-p)^2}$ & $\left(\frac{1-p}{1-pe^t}\right)^\alpha$ pour  $t<-\ln(p)$\\
+\hline
+Uniforme & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponentielle & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Gamma & $\text{Gamma}(\alpha,\beta)$ & $\begin{cases} \frac{\beta^\alpha t^{\alpha-1} e^{-\beta t}}{\Gamma(\alpha)} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{\alpha}{\beta}$ & $\dfrac{\alpha}{\beta^2}$ & $\left(\frac{\beta}{\beta -t}\right)^\alpha$ pour $t<\beta$\\
+\hline
+Normale & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+On rappelle la définition de la fonction Gamma avec 
+$$
+\Gamma(z) = \int_{0}^{+\infty}x^{z-1}e^{-x}\text{d}x.
+$$
+On note que pour $z\in \mathbb{N}$ alors $\Gamma(z) = (z-1)!$.
+\end{document}

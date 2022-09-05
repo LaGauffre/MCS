@@ -1,0 +1,317 @@
+\documentclass[12pt]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{titling}
+\usepackage{amsmath,amsfonts,amsthm,t1enc}
+\usepackage{tikz}%\usepackage{mathrsfs,color}
+\usepackage[colorlinks=true]{hyperref}
+\allowdisplaybreaks
+\usepackage{mathtools}
+\usepackage{pdfsync}
+\usepackage{array} % Improves `tabular` and `array` environments
+%   \usepackage{slashbox} % Defines \backslashbox{..}{..}                                                % need for `show only references'
+
+ \newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2019-2020 }
+\def\course{TDs Modélisation Charge Sinistre }
+\def\title{\MakeUppercase{TD2 : Théorie de l'algorithme de Panjer}}
+\def\name{Romain Gauchon}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Romain Gauchon\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+
+
+
+
+\smallskip
+
+
+
+\vspace{0.2cm}
+
+\textbf{Le but de ce TD est d'étudier la loi de la variable aléatoire $S=\sum_{k=1}^{N}X_k$.}
+
+\vspace{0.2cm}
+Considérons la variable aléatoire,
+\begin{equation}\label{eq:CompoundDistribution}
+S=\sum_{k=1}^{N}X_k
+\end{equation}
+avec 
+\begin{itemize}
+\item $X_1,X_2,X_3,\ldots$ des variables aléatoires iid positives de mêmes lois que $X$.
+\item $N$ est une variable aléatoire entière dont la loi est donnée par
+\begin{equation*}
+p_N(n)=\mathbb{P}(N=n),\text{ }n=0,1,2,\ldots.
+\end{equation*}  
+$N$ est supposée indépendante des $X_k$.
+\end{itemize}
+Une interprétation possible de la variable aléatoire $S$ est la suivante:\\
+
+Supposons qu'on considère un portefeuille non-vie (par exemple un portefeuille automobile), étudié sur un an. La variable $N$ compte le nombre total de sinistres pendant l'année. Chaque sinistre entraine une perte $X_{k}$ pour l'assureur. La variable aléatoire $S$ correspond donc à la perte totale de l'assureur sur une année. Une société d'assurance va étudier la variable aléatoire $S$ afin de pouvoir mieux connaitre et contrôler son risque, permettant le calcul des SCR par exemple.\\
+
+En théorie des files d'attente, $N$ peut modéliser le nombre de clients coincé dans la file d'attente, et $X_k$ leurs temps d'attentes respectifs. La variable aléatoire $S$ représente le temps d'attente total à la caisse.\\
+
+Panjer a proposé un algorithme récursif permettant de calculer la loi de $S$ \cite{Pa81}. Cet algorithme permet de calculer de manière exacte
+\begin{equation*}
+p_S(k)=\mathbb{P}(S=k),\text{ }k=0,1,2,\ldots
+\end{equation*}
+ lorsque les variables aléatoires $X_k$ sont discrètes. Pour la suite, nous supposerons donc que les variables aléatoires $X_{k}$ ont la même loi que la variable aléatoire discrète $X$, dont la loi est donnée par
+\begin{equation*}
+p_X(k)=\mathbb{P}(X=k),\text{ }k=0,1,2,\ldots.
+\end{equation*}
+Pour fonctionner, l'algorithme nécessite une hypothèse supplémentaire sur la loi de $N$. On dit que la variable aléatoire $N$ appartient à la famille de Panjer si il existe $a,b\in\mathbb{R}$ tel que 
+\begin{equation}\label{eq:PanjerRecurrenceRelationship}
+p_N(k)=\left(a+\frac{b}{k}\right)p_N(k-1),k=1,2,\ldots.
+\end{equation}  
+Les lois binomiales, binomiales négatives et de Poisson sont les seules lois appartenant la famille de Panjer.\\
+
+Ce TD consiste à redémontrer l'algorithme de Panjer.
+\begin{questions}
+\question Supposons que $N$ suit une loi binomiale négative $\text{Neg-Bin}(\alpha,p)$, avec $\alpha>1$ et $p\in[0,1]$. La loi de $N$ est donnée par 
+\begin{equation*}
+p_N(k)=\binom{\alpha+k-1}{k}(1-p)^{\alpha}p^{k},\text{ }k=0,1,\ldots.
+\end{equation*}
+La loi binomiale négative est souvent utilisée car elle est surdispersée (la variance est plus grande que l'espérance). La construction des variables binomiales négatives repose sur une somme de variables aléatoires géométriques. En effet, si $M_1,\ldots,M_\alpha$ sont des variables aléatoires iid suivant une loi géométrique $\text{Geom}(p)$: 
+\begin{equation*}
+\mathbb{P}(M_1=k)=(1-p)p^{k},\text{ }k\in\mathbb{N}.
+\end{equation*}
+Alors, la variable aléatoire $N=\sum_{l=1}^{\alpha}M_l$ suit une loi binomiale négative $\text{Neg-Bin}(\alpha,p)$. 
+\begin{parts}
+\part Montrer que la fonction génératrice des moments $M_1$ vérifie 
+\begin{equation}
+\Phi_{M_{1}}(t)=\frac{1-p}{1-pe^t}.
+\end{equation}
+En déduire l'espérance et la variance de $M_{1}$.
+
+%\color{blue}
+%\begin{eqnarray*}
+%\Phi_{M_{1}}(t)&=&\mathbb{E}(e^{tM_1})\\
+%&=&\sum_{m=0}^{+\infty}e^{mt}p_{M_1}(m)\\
+%&=&\sum_{m=0}^{+\infty}e^{mt}p^{m}(1-p)\\
+%&=&(1-p)\sum_{m=0}^{+\infty}(pe^{t})^{m}\\
+%&=&\frac{1-p}{1-pe^{t}}
+%\end{eqnarray*}
+%La moyenne est donnée par $\mathbb{E}(M_1)=\Phi_{M_{1}}^{(1)}(0)$. Il suit
+%\begin{eqnarray*}
+%\Phi_{M_{1}}^{(1)}(t)&=&(1-p)(-1)\frac{-pe^{t}}{(1-pe^{t})^{2}}.\\
+%\end{eqnarray*}
+%Finalement, $\mathbb{E}(M_1)=\frac{p}{1-p}$. De plus, $\mathbb{E}(M_1^{2})=\Phi_{M_{1}}^{(2)}(0)=\Phi_{M_{1}}'(0)$ et 
+%\begin{eqnarray*}
+%\Phi_{M_{1}}^{(2)}(t)&=&(1-p)\frac{pe^{t}(1-pe^{t})^{2}-2(-pe^{t})pe^{t}(1-pe^{t})}{(1-pe^{t})^{4}}\\
+%&=&(1-p)\frac{pe^{t}(1-pe^{t})+2(pe^{t})^{2}}{(1-pe^{t})^{3}}\\
+%\end{eqnarray*}
+%On obtient donc $\mathbb{E}(M_1^{2})=\frac{p(1+p)}{(1-p)^{2}}$, puis $\mathbb{V}(M_1)=\frac{p}{(1-p)^{2}}$.
+%\color{black}
+
+\part Calculer l'espérance, la variance et la fonction génératrice des moments de $N$.
+%\color{blue}
+%On a
+%\begin{equation*}
+%\Phi_{N}(t)=\Phi_{M_{1}}(t)^{\alpha}=\left(\frac{1-p}{1-pe^{t}}\right)^{\alpha},
+%\end{equation*}
+%\begin{equation*}
+%\mathbb{E}(N)=\sum_{l=1}^{\alpha}\mathbb{E}(M_l)=\alpha\mathbb{E}(M_1)=\frac{\alpha p}{1-p},
+%\end{equation*}
+%et
+%\begin{equation*}
+%\mathbb{V}(N)=\sum_{l=1}^{\alpha}\mathbb{V}(M_l)=\alpha\mathbb{V}(M_1)=\frac{\alpha p}{(1-p)^{2}},
+%\end{equation*}
+%\color{black}
+\part Montrer que la fonction génératrice des probabilités $\mathcal{G}_N(t)=\mathbb{E}(t^{N})$ de $N$ vérifie
+\begin{equation*}
+\mathcal{G}_N(t)=\left(\frac{1-p}{1-pt}\right)^{\alpha}
+\end{equation*}
+%\color{blue}
+%Remarquons que $\mathcal{G}_N(t)=\Phi_N[\ln(t)]$.Il suit
+%\begin{equation*}
+%\mathcal{G}_N(t)=\left(\frac{1-p}{1-pt}\right)^{\alpha},
+%\end{equation*}
+%en utilisant la question 1.(b).
+%\color{black}
+
+
+\part Montrer que $N$ appartient à la famille de Panjer, en montrant qu'il existe $a$ et $b$ tel que l'équation  \eqref{eq:PanjerRecurrenceRelationship} soit vérifiée. Exprimer $a$ et $b$ en fonction de $\alpha$ et $p$.
+%\color{blue}
+%Remarquons que
+%\begin{equation*}
+%\frac{p_N(k)}{p_N(k-1)}=\frac{\alpha+k-1}{k}p=\left[p+\frac{(\alpha-1)p}{k}\right]. 
+%\end{equation*}
+%La variable aléatoire $N$ appartient donc à la famille de Panjer avec $a=p$ et $b=p(\alpha-1)$.
+%\color{black}
+
+
+
+\end{parts}
+\question Montrer que 
+\begin{equation*}
+\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right)=\frac{j}{n},\text{ }j,n\in\mathbb{N}.
+\end{equation*}
+%\color{blue}
+%Un calcul permet d'obtenir
+%\begin{eqnarray*}
+%\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right)&=&\frac{1}{n}\times n\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right) \\
+%&=&\frac{1}{n}\times \left[\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right)+\ldots+\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right)\right] \\
+%&=&\frac{1}{n}\times \left[\mathbb{E}\left(X_1\Big\rvert \sum_{k=1}^{n}X_k=j\right)+\ldots+\mathbb{E}\left(X_n\Big\rvert \sum_{k=1}^{n}X_k=j\right)\right] \\
+%&=&\frac{1}{n}\times \sum_{k=1}^{n}\mathbb{E}\left(X_k\Big\rvert \sum_{k=1}^{n}X_k=j\right) \\
+%&=&\frac{1}{n}\times \mathbb{E}\left(\sum_{k=1}^{n}X_k\Big\rvert \sum_{k=1}^{n}X_k=j\right) \\
+%&=&\frac{j}{n}
+%\end{eqnarray*}
+%\color{black}
+\question Montrer que 
+\begin{equation*}
+\mathbb{P}\left(X_1=i\Big\rvert \sum_{k=1}^{n}X_k=j\right)=\frac{p_X(i)p_{X}^{\ast(n-1)}(j-i)}{p_{X}^{\ast(n)}(j)},\text{ }j\leq k\text{ and }n\geq1,
+\end{equation*}
+avec $p_{X}^{\ast(n)}(j)=\mathbb{P}\left(\sum_{k=1}^{n}X_k=j\right)$.
+%\color{blue}
+%\begin{eqnarray*}
+%\mathbb{P}\left(X_1=i\Big\rvert \sum_{k=1}^{n}X_k=j\right)&=&\frac{\mathbb{P}\left(X_1=i,\sum_{k=1}^{n}X_k=j\right)}{\mathbb{P}\left(\sum_{k=1}^{n}X_k=j\right)}\\
+%&=&\frac{\mathbb{P}\left(X_1=i\right)\mathbb{P}\left(\sum_{k=2}^{n}X_k=j-i\right)}{p_X^{\ast(n)}}\\
+%&=&\frac{p_X(i)p_{X}^{\ast(n-1)}(j-i)}{p_X^{\ast(n)}(j)}\\\\
+%\end{eqnarray*}
+%
+%\color{black}
+\question Montrer que 
+\begin{equation*}
+\mathbb{P}\left(S=0\right)=\mathcal{G}_N\left[p_X(0)\right],
+\end{equation*}
+où $\mathcal{G}_N(t)=\mathbb{E}\left(t^{N}\right)$ désigne la fonction génératrice des probabilités de $N$.
+%\color{blue}
+%Un calcul permet d'obtenir
+%\begin{eqnarray*}
+%\mathbb{P}(S=0)&=&\mathbb{P}\left(\sum_{k=1}^{N}X_k=0\right)\\
+%&=&\sum_{n=0}^{+\infty}\mathbb{P}\left(\sum_{k=1}^{N}X_k=0\Big\rvert N=n\right)\mathbb{P}(N=n)\\
+%&=&\sum_{n=0}^{+\infty}\mathbb{P}\left(\sum_{k=1}^{n}X_k=0\Big\rvert N=n\right)\mathbb{P}(N=n)\\
+%&=&\sum_{n=0}^{+\infty}\mathbb{P}\left(\sum_{k=1}^{n}X_k=0\right)\mathbb{P}(N=n)\\
+%&=&\sum_{n=0}^{+\infty}\mathbb{P}\left(X_1=0,\ldots,X_n=0\right)\mathbb{P}(N=n)\\
+%&=&\sum_{n=0}^{+\infty}\mathbb{P}\left(X=0\right)^{n}\mathbb{P}(N=n)\\
+%&=&\sum_{n=0}^{+\infty}p_X(0)^{n}\mathbb{P}(N=n)\\
+%&=&\mathcal{G}_{N}\left[p_X(0)\right].\\
+%\end{eqnarray*}
+%\color{black}
+\question L'objectif de cette question est de montrer que
+\begin{equation}\label{eq:PanjerRecursion}
+p_{S}(j)=\sum_{i=0}^{j}\left(a+b\frac{i}{j}\right)p_{X}(i)p_S(j-i),\text{ for }j\geq1.
+\end{equation}
+On suppose que $N$ vérifie \eqref{eq:PanjerRecurrenceRelationship} et appartient à la famille de Panjer.
+\begin{parts}
+\part Montrer que, pour $j\geq1$,
+\begin{equation}\label{eq:PartAB}
+p_{S}(j)=a\sum_{n=1}^{+\infty}p_{X}^{\ast(n)}(j)p_N(n-1)+b\sum_{n=1}^{+\infty}\frac{1}{n}p_{X}^{\ast(n)}(j)p_N(n-1).
+\end{equation}
+%\color{blue}
+%\begin{eqnarray*}
+%p_S(j)&=&\mathbb{P}(S=j)\\
+%&=&\sum_{n=1}^{+\infty}\mathbb{P}(S=j|N=n)\mathbb{P}(N=n)\\
+%&=&\sum_{n=1}^{+\infty}\mathbb{P}\left(\sum_{k=1}^{n}X_k=j\right)p_N(n)\\
+%&=&\sum_{n=1}^{+\infty}p_X^{\ast(n)}(j)\left(a+\frac{b}{n}\right)p_N(n-1)\\
+%&=&a\sum_{n=1}^{+\infty}p_X^{\ast(n)}(j)\left(a+\frac{b}{n}\right)p_N(n-1)+b\sum_{n=1}^{+\infty}\frac{1}{n}p_X^{\ast(n)}(j)p_N(n-1).\\
+%\end{eqnarray*}
+%\color{black}
+\part Montrer que
+\begin{equation}\label{eq:partA}
+a\sum_{n=1}^{+\infty}p_{X}^{\ast(n)}(j)p_N(n-1)=a\sum_{i=0}^{j}p_X(i)p_S(j-i).
+\end{equation}
+\textbf{Indice:} Remarquer que $p_X^{(n)}(j)=\sum_{i=0}^{j}p_X(i)p_X^{(n-1)}(j-i)$, et jouer sur les interversions de sommes.
+%\color{blue}
+%\begin{eqnarray*}
+%a\sum_{n=1}^{+\infty}p_{X}^{\ast(n)}(j)p_N(n-1)&=&a\sum_{n=1}^{+\infty}
+%\mathbb{P}\left(\sum_{k=1}^{n}X_k=j\right)p_N(n-1)\\
+%&=&a\sum_{n=1}^{+\infty}
+%\sum_{i=0}^{j}\mathbb{P}\left(X_1=i,\sum_{k=2}^{n}X_k=j-i\right)p_N(n-1)\\
+%&=&a\sum_{n=1}^{+\infty}
+%\sum_{i=0}^{j}\mathbb{P}\left(X_1=i\right)\mathbb{P}\left(\sum_{k=2}^{n}X_k=j-i\right)p_N(n-1)\\
+%&=&a
+%\sum_{i=0}^{j}p_X(i)\sum_{n=1}^{+\infty}p_{X}^{\ast(n-1)}(j-i)p_N(n-1)\\
+%&=&a
+%\sum_{i=0}^{j}p_X(i)\sum_{n=0}^{+\infty}p_{X}^{\ast(n)}(j-i)p_N(n)\\
+%&=&a
+%\sum_{i=0}^{j}p_X(i)p_S(j-i).\\
+%\end{eqnarray*}
+%\color{black}
+\part Montrer que
+\begin{equation}\label{eq:partB}
+b\sum_{n=1}^{+\infty}\frac{1}{n}p_{X}^{\ast(n)}(j)p_N(n-1)=b\sum_{i=0}^{j}\frac{i}{j}p_X(i)p_S(j-i).
+\end{equation}
+\textbf{Indice:} Utiliser la question 2 pour remplacer $\frac{1}{n}$, puis utiliser la question 3 et le fait que
+\begin{equation*}
+\mathbb{E}\left(X_1\Big\rvert\sum_{k=1}^{n}X_k=j\right)=\sum_{i=0}^{j}i\mathbb{P}\left(X_1=i\Big\rvert\sum_{k=1}^{n}X_k=j\right).
+\end{equation*}
+
+%\color{blue}
+%\begin{eqnarray*}
+%b\sum_{n=1}^{+\infty}\frac{1}{n}p_{X}^{\ast(n)}(j)p_N(n-1)&=&b\sum_{n=1}^{+\infty}\frac{1}{j}\mathbb{E}\left(X_1\Big\rvert\sum_{k=1}^{n}X_k=j\right)p_{X}^{\ast(n)}(j)p_N(n-1)\\
+%&=&b\sum_{n=1}^{+\infty}\frac{1}{j}\sum_{i=0}^{j}i\mathbb{P}\left(X_1=i\Big\rvert\sum_{k=1}^{n}X_k=j\right)p_{X}^{\ast(n)}(j)p_N(n-1)\\
+%&=&b\sum_{n=1}^{+\infty}\frac{1}{j}\sum_{i=0}^{j}ip_X(i)p_X^{\ast(n-1)}(j-i)p_N(n-1)\\
+%&=&b\sum_{i=0}^{j}\frac{i}{j}p_X(i)\sum_{n=1}^{+\infty}p_X^{\ast(n-1)}(j-i)p_N(n-1)\\
+%&=&b\sum_{i=0}^{j}\frac{i}{j}p_X(i)p_S(j-i).\\
+%\end{eqnarray*}
+%\color{black}
+\end{parts}
+Additionner les équations \eqref{eq:partA} et \eqref{eq:partB} montre \eqref{eq:PartAB}.
+
+\medbreak
+
+\medbreak
+
+%\question 
+%\textbf{Exercice Bonus: autour de la loi binomiale négative}
+
+%La loi binomiale négative est une loi discrète de paramètres $r > 0$ et $0 < p < 1$. Si $X$ est une variable aléatoire discrète, sa fonction de masse, pour tout $n \in \mathbb{N}$, est donnée par $f_{X}(n) = \frac{\Gamma(r + n)}{n! \Gamma(n)} p^{r} (1 - p)^{n}$.
+%	\begin{parts}
+%		\part  Calculer l'espérance et la variance d'une loi binomiale négative.
+
+%		\part Montrer qu'une loi binomial négative est en fait une loi mélange Poisson Gamma (ie une loi de Poisson de paramètre la variable aléatoire $\lambda$,  $\lambda $ suivant une loi gamma). 
+%	\end{parts}
+ 
+%Pour rappel, une variable aléatoire $N$ suivant une loi de Poisson  de paramètre $\lambda$ admet pour fonction de masse $f_{N}(n) = \frac{\lambda^{n}}{n!}e^{-\lambda}$, et une variable aléatoire $G$ suivant une loi gamma de paramètres $\alpha>0$ et $\theta>0$ admet pour densité $f_{G}(x) = \frac{x^{\alpha - 1}e^{- \frac{x}{\theta}}}{\Gamma(\alpha) \theta^{\alpha}}$.
+
+\end{questions}
+\bibliography{BibHW3}
+\bibliographystyle{plain}
+
+\end{document}

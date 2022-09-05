@@ -1,0 +1,269 @@
+\documentclass[8pt,notheorems]{beamer}
+\usetheme{Copenhagen}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\usepackage{tkz-graph}
+\usepackage{color}
+\usepackage{listings}
+
+\usepackage{amsmath,amsfonts,amsthm,t1enc}
+\usepackage{fourier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{decorations.text}
+
+\usetikzlibrary{automata,arrows,positioning,calc}
+\setbeamertemplate{footline}{\hfill \insertframenumber/\inserttotalframenumber}
+\def \si {\sigma}
+\def \la {\lambda}
+\def \al {\alpha}
+% \def\e*{\end{eqnarray*}}
+\def \di{\displaystyle}
+
+\def \E{\mathbb E}
+\def \N{\mathbb N}
+\def \Z{\mathbb Z}
+\def \NZ{\mathbb{N}_0}
+\def \I{\mathbb I}
+\def \w{\widehat}
+\def \P {\mathbb P}
+\def \V{\mathbb V}
+
+
+\newcommand{\CL}{\mathbb{C}}
+\newcommand{\RL}{\mathbb{R}}
+\newcommand{\nat}{{\mathbb N}}
+\newcommand{\Laplace}{\mathscr{L}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ve}{\bm{\mathrm{e}}} % vector e
+
+\renewcommand{\L}{\mathcal{L}} % e.g. L^2 loss.
+
+\newcommand{\ih}{\mathrm{i}}
+\newcommand{\oh}{{\mathrm{o}}}
+\newcommand{\Oh}{{\mathcal{O}}}
+\newcommand{\Exp}{\mathbb{E}}
+
+\newcommand{\Norm}{\mathcal{N}}
+\newcommand{\LN}{\mathcal{LN}}
+\newcommand{\SLN}{\mathcal{SLN}}
+
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Ind}{\mathbb I}
+\newcommand\bfsigma{\bm{\sigma}}
+\newcommand\bfSigma{\bm{\Sigma}}
+\newcommand\bfLambda{\bm{\Lambda}}
+\newcommand{\stimes}{{\times}}
+\def \limsup{\underset{n\rightarrow+\infty}{\overline{\lim}}}
+\def \liminf{\underset{n\rightarrow+\infty}{\underline{\lim}}}
+
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+%\makeatletter
+%\def\th@mystyle{%
+%    \normalfont % body font
+%    \setbeamercolor{block title example}{bg=orange,fg=white}
+%    \setbeamercolor{block body example}{bg=blue!20,fg=black}
+%    \def\inserttheoremblockenv{block}
+%  }
+%\makeatother
+%\theoremstyle{mystyle}
+
+\makeatletter
+    \ifbeamer@countsect
+      \newtheorem{theorem}{\translate{Theorem}}[section]
+    \else
+      \newtheorem{theorem}{\translate{Theorem}}
+    \fi
+    \newtheorem{corollary}{\translate{Corollary}}
+    \newtheorem{prop}{\translate{Proposition}}
+    \newtheorem{lemma}{\translate{Lemma}}
+    \newtheorem{problem}{\translate{Problem}}
+    \newtheorem{remark}{\translate{Remark}}
+    \newtheorem{solution}{\translate{Solution}}
+
+    \theoremstyle{definition}
+    \newtheorem{definition}{\translate{Definition}}
+    \newtheorem{definitions}{\translate{Definitions}}
+
+    \theoremstyle{example}
+    \newtheorem{example}{\translate{Example}}
+    \newtheorem{examples}{\translate{Examples}}
+
+\makeatletter
+\def\th@mystyle{%
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=orange,fg=white}
+    \setbeamercolor{block body example}{bg=orange!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+\theoremstyle{mystyle}
+\newtheorem{fact}{Fact}
+
+
+
+
+
+
+    % Compatibility
+    \newtheorem{Beispiel}{Beispiel}
+    \newtheorem{Beispiele}{Beispiele}
+    \theoremstyle{plain}
+    \newtheorem{Loesung}{L\"osung}
+    \newtheorem{Satz}{Satz}
+    \newtheorem{Folgerung}{Folgerung}
+    \newtheorem{Fakt}{Fakt}
+    \newenvironment{Beweis}{\begin{proof}[Beweis.]}{\end{proof}}
+    \newenvironment{Lemma}{\begin{lemma}}{\end{lemma}}
+    \newenvironment{Proof}{\begin{proof}}{\end{proof}}
+    \newenvironment{Theorem}{\begin{theorem}}{\end{theorem}}
+    \newenvironment{Problem}{\begin{problem}}{\end{problem}}
+    \newenvironment{Corollary}{\begin{corollary}}{\end{corollary}}
+    \newenvironment{Example}{\begin{example}}{\end{example}}
+    \newenvironment{Examples}{\begin{examples}}{\end{examples}}
+    \newenvironment{Definition}{\begin{definition}}{\end{definition}}
+\makeatother
+
+
+
+
+
+
+
+
+
+
+
+% ============================================================
+% Title
+% ============================================================
+
+\title[]{Modélisation Charge Sinistre M2 Actuariat}
+\subtitle{Chapitre I: Introduction}
+\author{Pierre-Olivier Goffard}
+\institute{
+	   Université de Lyon 1\\
+	ISFA\\
+	   \texttt{pierre-olivier.goffard@univ-lyon1.fr}
+	  }
+\date{
+ISFA\\
+\today}
+\lstset{language=SAS}
+\begin{document}
+
+\frame{\titlepage}
+
+
+% ============================================================
+\begin{frame}[allowframebreaks]
+
+
+L'objet d'étude de ce cours est un variable aléatoire $X$ qui représente la charge totale de sinitre pour un portefeuille de contrat d'assurance non-vie durant une période d'exercice donnée.\\
+
+Deux modèles sont étudiés:
+\begin{itemize}
+    \item Le modèle individuel
+    $$
+    X_{\text{ind}} = \sum_{i  = 1}^nI_iW_i
+    $$
+    où
+    \begin{itemize}
+        \item $n$ désigne le nombre d'assuré en portefeuille
+        \item $I_i\sim \text{Ber}(p_i)$ indique si l'assuré $i$ a subit au moins un sinistre où non
+        \item $W_i$ est une variable aléatoire positive égale au montant cumulé des sinistres pour l'assuré $i$ sur la période d'exercice considérée
+    \end{itemize}
+    \item Le modèle collectif
+    $$
+    X_{\text{coll}} = \sum_{i  = 1}^N U_i
+    $$
+    où
+    \begin{itemize}
+        \item $N$ est une variable aléatoire de comptage égale au nombre de sinistres reportés pendant la période d'exercice
+        \item $U_i$ est une variable aléatoire positive correspondant à l'indemnisation au titre du sinistre $i$.  
+    \end{itemize}
+\end{itemize}
+
+On adopte une vue assez simpliste du risque en négligeant par exemple l'inflation sur les sinistres au cours du temps ou en supposant que les sinistres sont réglés instantanément. 
+\end{frame}
+\begin{frame}[allowframebreaks]
+La distribution de probabilité de $X$ nous intéresse pour 
+\begin{itemize}
+    \item la tarification: La prime est calculée sur la base de l'espérance $\E(X)$ et de la variance $\V(X)$ 
+    $$
+    \pi = (1+\eta)\E(X)\text{ ou }\pi = \E(X)+\alpha \V(X)
+    $$
+    où $\eta,\alpha>0$ désignent les chargements de sécurité. 
+    \item La détermination de marge de solvabilité basée sur des mesure de risque comme
+    \begin{itemize}
+        \item La \textit{Value-at-risk} définie par 
+        $$
+        \text{VaR}_X(\alpha) = \inf\{x\geq 0\text{ ; }F_X(x)> \alpha\}.
+        $$
+        La VaR de niveau $99.5\%$ est la mesure de risque de référence dans Solvabilité II.
+        \item La \textit{Tail Value-at-risk} définie par 
+        $$
+        \text{TVaR}_X(\alpha) = \mathbb{E}\left[X|X>\text{VaR}_X(\alpha)\right].
+        $$
+        La TVaR de niveau $99\%$ est la mesure de risque de référence pour le Swiss Solvency Test.
+    \end{itemize}
+\end{itemize}
+La TVaR est aussi liée à la prime \textit{stop-loss} en réassurance définie par 
+$$
+\text{SLP}_X(c) = \E\left[(X-c)_+\right]
+$$
+où $c>0$ est le seuil de rétention. La distribution de probabilité pour $X_{ind}$ et $X_{coll}$ est difficile à expliciter dans la plupart des cas et l'évaluation des quantités ci-dessus nécessite la mise au point de méthodes numériques.\\
+
+Dans ce cours, nous étudierons
+\begin{itemize}
+    \item Les hypothèses sous jacentes aux modèles individuels et collectifs
+    \item Les lois de probabilités pour la fréquence des sinistres (variable $N$)
+    \begin{itemize}
+        \item Famille de Katz: Poisson, binomial, binomial négatif. Voir Katz \cite{Ka65}
+        \item Distribution \textit{zero-inflated}, car les données montrent souvent une occurence de $0$ plus importante que pour les lois classiques 
+        \item Loi de Poisson mélange, où le paramètre de la loi de Poisson est une variable aléatoire. Cela permet notamment la prise en compte d'une hétérogénéité dans la population des assurés. 
+    \end{itemize}
+    \item Les lois de probabilités pour les montants de sinistres 
+    \begin{itemize}
+        \item Les classiques: gamma, lognormale, Pareto. Distingo entre les distributions à queue légère et lourde. 
+        \item Distributions flexible comme les lois mélanges de Erlang et Phase type
+        \item Les lois de \textit{splicing}, pour modéliser séparément le ventre et la queue de la distribution. On observe souvent une occurence forte de sinistres de faible intensité et une occurence plus faible mais non négligeable de sinistre de forte intensité.  
+    \end{itemize}
+    \item Méthodes numériques pour les distributions composées
+    \begin{itemize}
+        \item Monte Carlo approximation => Problématique pour évaluer des quantiles extrèmes
+        \item Normal approximation
+        \item Gamma approximation
+        \item Algorithme de Panjer, voir Panjer \cite{Pa81}
+        \item \text{Fast Fourier Transform inversion}
+    \end{itemize}
+    \item Extension du modèle collectif
+    \begin{itemize}
+        \item Multivarié pour modéliser conjointement le risque associé à plusieurs branche d'activité. Introduction d'une structure de dépendance.
+        \item Dynamique avec la modélisation de la charge de sinistres au courts du temps via un processus stochastique 
+        $$
+        X_t = \sum_{i  = 1}^{N_t} U_i,\text{ }t\geq0.
+        $$
+        où $N_t$ est un processus de Poisson par exemple. Il s'agit d'un premier pas vers le cours de théorie de la ruine. 
+    \end{itemize}
+\end{itemize} 
+
+\end{frame}
+\begin{frame}[allowframebreaks]{Références bibliographiques}
+Mes notes s'inspirent des notes de Stéphane Loisel \cite{Lo19}
+\bibliographystyle{plain}
+\bibliography{MCS_notes}
+\end{frame}
+\end{document}

@@ -1,0 +1,884 @@
+\documentclass[8pt,notheorems]{beamer}
+\usetheme{Copenhagen}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\usepackage{tkz-graph}
+\usepackage{color}
+\usepackage{listings}
+
+\usepackage{amsmath,amsfonts,amsthm,t1enc}
+\usepackage{fourier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{decorations.text}
+
+\usetikzlibrary{automata,arrows,positioning,calc}
+\setbeamertemplate{footline}{\hfill \insertframenumber/\inserttotalframenumber}
+\def \si {\sigma}
+\def \la {\lambda}
+\def \al {\alpha}
+% \def\e*{\end{eqnarray*}}
+\def \di{\displaystyle}
+
+\def \E{\mathbb E}
+\def \N{\mathbb N}
+\def \Z{\mathbb Z}
+\def \NZ{\mathbb{N}_0}
+\def \I{\mathbb I}
+\def \w{\widehat}
+\def \P {\mathbb P}
+\def \V{\mathbb V}
+
+
+\newcommand{\CL}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\nat}{{\mathbb N}}
+\newcommand{\Laplace}{\mathscr{L}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ve}{\bm{\mathrm{e}}} % vector e
+
+\renewcommand{\L}{\mathcal{L}} % e.g. L^2 loss.
+
+\newcommand{\ih}{\mathrm{i}}
+\newcommand{\oh}{{\mathrm{o}}}
+\newcommand{\Oh}{{\mathcal{O}}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\va}{\textbf{v.a.}}
+\newcommand{\iid}{\textbf{i.i.d.}}
+
+\newcommand{\Norm}{\mathcal{N}}
+\newcommand{\LN}{\mathcal{LN}}
+\newcommand{\SLN}{\mathcal{SLN}}
+
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Ind}{\mathbb I}
+\newcommand\bfsigma{\bm{\sigma}}
+\newcommand\bfSigma{\bm{\Sigma}}
+\newcommand\bfLambda{\bm{\Lambda}}
+\newcommand{\stimes}{{\times}}
+\def \limsup{\underset{n\rightarrow+\infty}{\overline{\lim}}}
+\def \liminf{\underset{n\rightarrow+\infty}{\underline{\lim}}}
+
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+%\makeatletter
+%\def\th@mystyle{%
+%    \normalfont % body font
+%    \setbeamercolor{block title example}{bg=orange,fg=white}
+%    \setbeamercolor{block body example}{bg=blue!20,fg=black}
+%    \def\inserttheoremblockenv{block}
+%  }
+%\makeatother
+%\theoremstyle{mystyle}
+
+\makeatletter
+    \ifbeamer@countsect
+      \newtheorem{theorem}{\translate{Theorem}}[section]
+    \else
+      \newtheorem{theorem}{\translate{Theorem}}
+    \fi
+    \newtheorem{corollary}{\translate{Corollary}}
+    \newtheorem{prop}{\translate{Proposition}}
+    \newtheorem{lemma}{\translate{Lemma}}
+    \newtheorem{problem}{\translate{Problem}}
+    \newtheorem{remark}{\translate{Remark}}
+    \newtheorem{solution}{\translate{Solution}}
+
+    \theoremstyle{definition}
+    \newtheorem{definition}{\translate{Definition}}
+    \newtheorem{definitions}{\translate{Definitions}}
+
+    \theoremstyle{example}
+    \newtheorem{example}{\translate{Example}}
+    \newtheorem{examples}{\translate{Examples}}
+
+\makeatletter
+\def\th@mystyle{%
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=orange,fg=white}
+    \setbeamercolor{block body example}{bg=orange!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+\theoremstyle{mystyle}
+\newtheorem{fact}{Fact}
+
+
+
+
+
+
+    % Compatibility
+    \newtheorem{Beispiel}{Beispiel}
+    \newtheorem{Beispiele}{Beispiele}
+    \theoremstyle{plain}
+    \newtheorem{Loesung}{L\"osung}
+    \newtheorem{Satz}{Satz}
+    \newtheorem{Folgerung}{Folgerung}
+    \newtheorem{Fakt}{Fakt}
+    \newenvironment{Beweis}{\begin{proof}[Beweis.]}{\end{proof}}
+    \newenvironment{Lemma}{\begin{lemma}}{\end{lemma}}
+    \newenvironment{Proof}{\begin{proof}}{\end{proof}}
+    \newenvironment{Theorem}{\begin{theorem}}{\end{theorem}}
+    \newenvironment{Problem}{\begin{problem}}{\end{problem}}
+    \newenvironment{Corollary}{\begin{corollary}}{\end{corollary}}
+    \newenvironment{Example}{\begin{example}}{\end{example}}
+    \newenvironment{Examples}{\begin{examples}}{\end{examples}}
+    \newenvironment{Definition}{\begin{definition}}{\end{definition}}
+\makeatother
+
+
+
+
+
+
+
+
+
+
+
+% ============================================================
+% Title
+% ============================================================
+
+\title[]{Modélisation Charge Sinistre M2 Actuariat}
+\subtitle{Chapitre III: Modèle Collectif}
+\author{Pierre-Olivier Goffard}
+\institute{
+	   Université de Lyon 1\\
+	ISFA\\
+	   \texttt{pierre-olivier.goffard@univ-lyon1.fr}
+	  }
+\date{
+ISFA\\
+\today}
+\lstset{language=SAS}
+\begin{document}
+
+\frame{\titlepage}
+
+
+% ============================================================
+\section{Définition du modèle collectif}
+\begin{frame}[allowframebreaks]
+\underline{I. Définition du modèle collectif}\\
+Le modèle collectif donne la somme agrégé des montants des sinistres sur une période d'exercice donnée à la maille portefeuille plutôt qu'à la maille contrat ou groupe homogène de contrat. On suppose que
+\begin{itemize}
+    \item le nombre de sinistre est donné par une variable de comptage $N\in \N$, de loi notée
+    $$
+    p_N(n) = \P(N = n),\text{ }n = 0,1,\ldots
+    $$
+    \item Les montants de sinistres $U_1,U_2,\ldots, U_N$ forme une suite de variables aléatoire positives \textbf{i.i.d.} de densité de probablité $f_U$ et indépendantes de $N$.
+\end{itemize}
+La charge totale est définie par
+\begin{equation}\label{eq:modele_individuel}
+X = \sum_{i = 1}^{N}U_i.
+\end{equation}
+Ce modèle est moins précis que le modèle individuel mais bien plus commode à calibrer. Son problème principal est l'absence de formule fermée (à quelques exceptions près) pour sa fonction de répartition.
+\end{frame}
+\subsection{Distribution de $X$}
+\begin{frame}[allowframebreaks]
+\underline{1. Distribution de $X$}\\
+La mesure de probabilité de $X$ est mixte au sens où elle admet un atome de probabilité en $X=0$ correspondant à l'évènement $\{N = 0\}$. On a
+$$
+\text{d}\P_X(x) = p_N(0)\delta_0(x)+f_X^{+}(x)\text{d}\lambda(x),
+$$
+où $f_X^{+}(x)$ correspond à la densité de la partie absolument continue de $X$ définie par
+$$
+f^{+}_X(x) = \sum_{k = 1}^{\infty}p_N(k)f_U^{\ast k}(x),\text{ }x>0.
+$$
+avec $f_U^{\ast k}$ qui désigne le $k^{\text{ème}}$ produit de convolution de $f_U$ avec elle-même (densité de la somme $U_1+\ldots+ U_k$. Il s'agit d'une densité de probabilité défaillante au sens où
+$$
+\int f^{+}_X(x)\text{d}\lambda(x) = 1-p_N(0).
+$$
+L'expression de $f_X^+$ est problématique car elle implique une série infinie avec des produit de convolutions imbriqués (intégrale successive).
+\begin{example}[Modèle géométrique-Exponentiel]
+Supposons que les sinistres soient de loi exponentielle $U\sim \text{Exp}(\beta)$ de densité
+$$
+f_U(x) = \frac{e^{-x/\beta}}{\beta},\text{ }x>0.
+$$
+et que la fréquence des sinistres soit de loi géométrique $N\sim \text{Geom}(p)$ de loi
+$$
+p_N(k) = p^k(1-p),\text{ }k = 1,2,\ldots.
+$$
+On a
+\begin{eqnarray*}
+f_X^+(x) &=& \sum_{k = 1}^{+\infty}(1-p)p^k\frac{e^{-x/\beta}x^{k-1}}{\beta^k (k-1)!}\\
+&=& (1-p)e^{-x/\beta}\sum_{k = 1}^{+\infty}p^k\frac{x^{k-1}}{\beta^k(k-1)!}\\
+&=&\frac{(1-p)p}{\beta}e^{-x/\beta}\sum_{k = 0}^{+\infty}\frac{1}{k!}\left(\frac{px}{\beta}\right)^k\\
+&=&\frac{(1-p)p}{\beta}e^{-x(1-p)/\beta}.\\
+\end{eqnarray*}
+\end{example}
+\end{frame}
+\begin{frame}
+On doit très souvent avoir recours aux méthodes numériques pour calculer les quantités intéressantes pour la gestion des risques comme par exemple la \textit{Value-at-Risk}
+$$
+\text{VaR}_X(\alpha) = \inf\{x\geq0\text{ : }F_{X}(x)\geq\alpha\}
+$$
+ou la \textit{Tail-Value-at-Risk}
+$$
+\text{TVaR}_X(\alpha) = \E[X|X>\text{VaR}_X(\alpha)].
+$$
+En réassurance, la prime d'un traité non-proportionelle est tarifé par
+$\E[(X-c)_+]$ où $c>0$ désigne le seuil de rétention, on voit parfois $\E[min((X-c)_+, d)]$ où $d>0$ est la limite.
+ \end{frame}
+\subsection{Moments de $X$}
+\begin{frame}[allowframebreaks]
+\underline{2. Moments de $X$}\\
+\begin{prop}[$\E(X)$, $\V(X)$, et $M_X$]
+\begin{enumerate}
+    \item L'espérance de $X$ est donnée par
+    $$\E(X) = \E(N)\times \E(U)$$
+    \item La variance de $X$ est donnée par
+    $$\V(X) = \E(N)\V(U)+\V(N)\E(U)^2$$
+    \item La fonction génératrice des moments $M_X(s) := \E(e^{sX)}$ de $X$ est donnée par
+    $$M_X(s) = G_N\left[M_U(s)\right],$$
+    où $G_N(s):=\E(s^N)$ est la fonction génératrice des probabilités de $N$
+\end{enumerate}
+\end{prop}
+\underline{preuve:}\\
+\begin{enumerate}
+    \item
+    \begin{eqnarray*}
+    \E(X) &=& \E[\E(X|N)]=\E\left[\E\left(\sum_{i = 1}^{N}U_i|N\right)\right]= \E\left[\sum_{i = 1}^{N}\E\left(U_i|N\right)\right]\\
+    &=& \E\left[N\E\left(U\right)\right]=\E(N)\E\left(U\right).
+    \end{eqnarray*}
+    \item
+     \begin{eqnarray*}
+    \V(X) &=& \E[\V(X|N)] + \V[\E(X|N)]= \E\left[\V\left(\sum_{i = 1}^{N}U_i|N\right)\right] + \V\left[\E\left(\sum_{i = 1}^{N}U_i|N\right)\right]\\
+    &=& \E\left[\sum_{i = 1}^{N}\V\left(U_i|N\right)\right] + \V\left[\sum_{i = 1}^{N}\E\left(U_i|N\right)\right]\\
+    &=& \E\left[N\V\left(U\right)\right] + \V\left[N\E\left(U\right)\right]= \E(N)\V\left(U\right) + \V(N)\E\left(U\right)^2.
+    \end{eqnarray*}
+    \item
+    \begin{eqnarray*}
+    M_X(s) &=& \E\left(e^{sX}\right)=\E\left(e^{s\sum_{i = 1}^{N}U_i}\right)= \E\left[\E\left(\prod_{i = 1}^{N}e^{sU_i}|N\right)\right]= \E\left[\prod_{i = 1}^{N}\E\left(e^{sU}\right)\right]\\
+    &=& \E\left[\E\left(e^{sU}\right)^{N}\right]=\E\left[\E\left(M_U(s)\right)^{N}\right] = G_N\left[M_U(s)\right].
+    \end{eqnarray*}
+\end{enumerate}
+\begin{example}[Modèle Poisson-Gamma]
+Supposons que $N\sim \text{Pois}(\lambda)$ de loi
+$$
+\P(N =n)=\frac{e^{-\lambda}\lambda^n}{n!},\text{ }n = 0,1,2,\ldots
+$$
+et que $U\sim \text{Gamma}(\alpha, \beta)$ de densité
+$$
+f_U(x) = \frac{e^{-x/\beta}x^{\alpha-1}}{\beta^\alpha\Gamma(\alpha)}
+$$
+On a
+\begin{enumerate}
+    \item $\E(X) = \alpha\beta\lambda$
+    \item $\V(X) = \alpha\beta^2\lambda + \alpha^2\beta^2\lambda$
+    \item $M_X(s) = \exp\left\{\lambda\left[\left(\frac{1}{1-\beta s}\right)^\alpha - 1\right]\right\}$
+\end{enumerate}
+\end{example}
+\end{frame}
+\section{Modèle pour la fréquence des sinistres}
+\begin{frame}[allowframebreaks]
+\underline{II. Modèle pour la fréquence des sinistres}
+\begin{definition}[Les classiques]
+\begin{enumerate}
+    \item Loi de Poisson $N\sim\text{Pois}(\lambda)$, $\lambda>0$, avec
+    $$
+    p_N(k) = \frac{e^{-\lambda}\lambda^k}{k!},\text{ }k = 0,1,2,\ldots
+    $$
+    \item Loi binomial $N\sim\text{Bin}(n,p)$, $p\in[0,1], n\in\N^\ast$, avec
+    $$
+    p_N(k) = \binom{n}{k}p^k(1-p)^{n-k},\text{ }k = 0,1,2,\ldots,n.
+    $$
+    \item Loi binomial négative $N\sim\text{Neg-Bin}(\alpha,p)$, $p\in[0,1], \alpha>0$, avec
+    $$
+    p_N(k) = \frac{\Gamma(\alpha+k)}{\Gamma(k+1)\Gamma(\alpha)}p^k(1-p)^{\alpha},\text{ }k = 0,1,2,\ldots
+    $$
+\end{enumerate}
+\end{definition}
+\begin{remark}
+La loi de Poisson manque de flexibilité du fait de son seul paramètre $\lambda$. La loi binomial a le défaut d'admettre un support fini. La loi binomial négative est bien souvent le meilleur choix. On distingue ces distribution sur la base de leur dispersion
+ \begin{itemize}
+    \item La loi de Poisson est equidispersé au sens ou $\E(N)= \V(N)$
+    \item La loi binomial est sous dispersé avec $\E(N)\geq \V(N)$
+    \item La loi binomiale négative est sur-dispersée avec $\E(N)\leq \V(N)$
+ \end{itemize}
+\end{remark}
+Les données de fréquence de sinistres sur des périodes d'exercice exhibent bien souvent un trop grand nombre de $0$ qui rendent les distributions inopérantes. On peut néanmoins y remédier facilement en modifiant en $0$ les lois de fréquence.
+\begin{definition}[Zero-inflated distribution]
+Soit $N$ une variable aléatoire de comptage de loi $p_N$, la variable $N_0$ de loi
+$$
+p_{N_0}(k) = \begin{cases}
+p_0,&\text{ pour }k = 0,\\
+\frac{1-p_0}{1-p_N(0)}p_N(k),&\text{ pour}k\geq1.
+\end{cases}
+$$
+où $p_0\in[0,1]$est la version modifiée en $0$ de la variable aléatoire $N$
+\end{definition}
+\begin{remark}
+Il s'agit d'une simple modification qui force la probabilité de ne pas observer de sinsitres à $p_0$. On estime ce paramètre sur la base de la proportion de $0$ dans nos observations, puis on utilise les observations non nulle pour calibrer $p_{N_{0}|N_{0}>0}$.
+\end{remark}
+\end{frame}
+\begin{frame}[allowframebreaks]
+Malgré ses défauts, le modèle de Poisson est souvent le point de départ de la modélisation de la fréquence des sinistres. Sur une période donnée, l'ensemble du portefeuille ou un assuré, déclare un nombre moyen de sinistre $\lambda$. Le modèle peut-être rafiné en supposant $\lambda$ aléatoire
+\begin{itemize}
+ \item Compenser l'erreur d'estimation associé à un manque de données
+ \item Incorporer de l'information a priori
+ \item Prendre en compte l'hétérogénéité du portefeuille d'assuré
+ \item Accomoder une situation $\V(N)>\E(N)$
+ \end{itemize}
+ \begin{definition}[Poisson Mélange]
+  Soit $\Lambda$ une variable aléatoire positive, la variable aléatoire $N$ suit une loi de Poisson mélange $\text{M-Pois}(\Lambda)$, avec
+  $$
+  \P(N = k) = \int_{\R_+}\frac{e^{-\lambda}\lambda^k}{k!}\text{d}\P_{\Lambda}(\lambda),
+  $$
+  autrement dit $N|\Lambda=\lambda \sim\text{Pois}(\lambda)$.
+ \end{definition}
+ \begin{prop}
+ \begin{enumerate}
+ \item $\E(N) =\E(\Lambda)$
+ \item $\V(N) = \E(\Lambda)+\V(\Lambda)$
+ \item $G_N(s)=M_\Lambda(s-1)$
+ \end{enumerate}
+ \end{prop}
+ \underline{preuve:}
+ \begin{enumerate}
+ \item $\E(N)=\E[\E(N|\Lambda)]=\E(\Lambda)$
+ \item $\V(N)=\E[\V(N|\Lambda]+ \V[\E(N|\Lambda]=\E(\Lambda)+ \V(\Lambda)$
+ \item $G_N(s)=\E\left(s^N\right)=\E\left[\E\left(s^N|\Lambda\right)\right]=\E\left\{\exp[\Lambda(s-1)]\right\}=M_\Lambda(s-1).$
+ \end{enumerate}
+ \begin{example}[Hétérogénéité du portefeuille]
+ On suppose l'existence de deux types de conducteurs,
+ \begin{itemize}
+ \item un conducteur prudent générant $\lambda_1$ accidents en moyenne par période
+ \item un conducteur à risque générant $\lambda_2>\lambda_1$ accidents en moyenne par période
+ \end{itemize}
+ % On peut imaginer $\lambda_1 =\alpha_1\lambda$ et $\lambda_2 =\alpha_2\lambda$, où $\alpha_1,\alpha_2\in(0,1)$ caractérise l'exposition.
+ Pour un conducteur donné $i\in\{1,\ldots,n\}$, on ne connait pas sa classe d'appartenance, le nombre de sinistres pour ce conducteur est donnée par
+ $$
+ M_i = N_1\mathbb{I}_{A_i} + N_2\mathbb{I}_{A^c_i}
+ $$
+ où $N_1\sim\text{Pois}(\lambda_1)$, $N_2\sim\text{Pois}(\lambda_2)$ et $A=\{\text{Conducteur prudent}\}$ sont des variables aléatoires/ évènements indépendants. On a
+ $$
+ \P(M_i = m) = \P(N_1 = m)\P(A_{i})+ \P(N_2 = m)(1-\P(A_{i}))
+ $$
+ Si on note $p_i=\P(A_{i})$ et $\Lambda_i = \lambda_1\mathbb{I}_{A_i}+\lambda_2\mathbb{I}_{A^{c}_i}$ alors $M_i\sim \text{M-Pois}(\Lambda_i)$.
+\end{example}
+ En supposant que les nombres de sinistres $M_1,\ldots,M_n$ pour chacun des assurées forme une suite de variables aléatoires iid $\text{M-Pois}(\Lambda)$ ($p_i=p_j=p$ pour tout $i,j$) alors le nombre de sinistres pour l'ensemble du portefeuille vérifie
+ $$
+ M=\sum_{i =1}^n M_i\sim \text{M-Pois}[\lambda_1\times K + \lambda_1\times (n-K)],
+ $$
+ où $K\sim \text{Bin}(n,p)$. On part du postulat qu'on a en portefeuille une proportion $p$ de bon risque. Au fur et à mesure, on peut mettre à jour la probabilité d'appartenir à telle ou telle classe de conducteur en utilisant le théorème de Bayes. Si le conducteur $i$ subit $l\in\N$ sinistres, on remplacera $\P(A_i)$ par
+ $$
+ \P(A_i|M_i=l) = \frac{\P(M_i = l|A_i)\P(A_i)}{\P(M_i = l|A_i)\P(A_i)+\P(M_i = l|A_i^c)\P(A_i^c)}.
+ $$
+Cela va permetre d'ajuster la prime via un mécanisme de Bonus-Malus par exemple. La distribution de $M$ comme
+ $$
+ M\sim \text{M-Pois}\left[\lambda_1\sum_{i=1}^n \mathbb{I}_{A_i} + \lambda_2\left(n-\sum_{i=1}^{n} \mathbb{I}_{A_i}\right) \right]
+ $$
+ peut poser problème à l'évaluation. On constate ici comment un modèle de mélange permet de faire le pont entre modèlisation individuelle et collective.
+ \begin{example}[Incertitude sur le paramètre]
+ Si le nombre moyen de sinistres observés est $\widehat{\lambda} =\frac{1}{n}\sum_{i=1}^nN_i$, l'incertitude d'échantillonage peut être pris en compte en définissant
+ $$
+ \Lambda\sim\text{Unif}\left[\widehat{\lambda}-t_{1-\alpha/2}(n-1)\frac{\widehat{\sigma}}{\sqrt{n}},\widehat{\lambda}+t_{1-\alpha/2}(n-1)\frac{\widehat{\sigma}}{\sqrt{n}}\right],
+ $$
+ où $\widehat{\sigma}$ représente l'écart type de la série d'observation de la fréquence des sinsitres et $t_{1-\alpha/2}(n-1)$ désigne le quantile d'ordre $1-\alpha/2$ d'une loi de Student à $n-1$ degré de liberté.
+ \end{example}
+ \begin{example}[Inférence Bayésienne de la loi de Poisson]
+ L'inférence Bayésienne permet souvent de pallier à un manque d'observation en incorporant de l'information à priori sous la forme d'une distribution a priori sur le paramètre. Pour un paramètre positif (comme $\lambda$) un choix classique est la loi gamma $\Lambda\sim \Gamma(\alpha, \beta)$. Notons $N=(N_1,\ldots, N_n)$ la série d'observation de la fréquence des sinistres
+ Le paramètre $\lambda$ est estimé par la moyenne ou le mode de la loi a posteriori
+ $$
+ p_{\Lambda|N}(\Lambda|N)=\frac{p_{N|\Lambda}(k|\lambda)f_\Lambda(\lambda)}{\int p_{N|\Lambda}(k|\lambda)f_\Lambda(\lambda)\text{d}\lambda},
+ $$
+ où $p_{N|\Lambda}(k|\lambda)$ désigne la vraisemblance des données sachant que $\Lambda=\lambda$. L'évaluation du dénominateur de la vraisemblance a posteriori pose souvent des problèmes. Le choix gamma donne
+ \begin{eqnarray*}
+ \int p_{N|\Lambda}(k|\lambda)f_\Lambda(\lambda)\text{d}\lambda&=&
+ \int \frac{e^{-\lambda}\lambda^k}{k!}\frac{e^{-\lambda/\beta}\lambda^{\alpha-1}}{\Gamma(\alpha)\beta^\alpha}\text{d}\lambda\\
+ &=&\frac{1}{k!\Gamma(\alpha)\beta^\alpha}\int e^{-\lambda\left(\frac{\beta+1}{\beta}\right)}\lambda^{k+\alpha-1}\text{d}\lambda\\
+ &=&\frac{\Gamma(\alpha+k)}{k!\Gamma(\alpha)}\left(\frac{1}{1+\beta}\right)^\alpha\left(\frac{\beta}{1+\beta}\right)^k.
+  \end{eqnarray*}
+
+ \end{example}
+\end{frame}
+\section{Modèles pour les montants de sinistres}
+\subsection{Les lois classiques}
+\begin{frame}[allowframebreaks]
+\underline{II. Modèles pour les montants de sinistres}\\
+\underline{1. Les lois classiques}\\
+Les lois de type gamma ont le problème suivant
+$$
+\P(U>x)\sim e^{-x/\beta}\text{, }x\rightarrow+\infty
+$$
+qui entraine une sous estimation de la probabilité d'avoir des sinistres de forte intensité. On parle de distribution à queue légère. En actuariat, on considère fréquemment que les distributions sont à queues lourdes lorsqu'elle n'admettent pas de fonction génératrice des moments, c'est à dire
+$$
+M_U(s) = \E(e^{sU})=\infty\text{ pour tout }s>0
+$$
+Plusieurs lois sur $\R_+$ admettent une queue plus lourde permettant une modélisation plus appropriée des montants de sinistre.
+\begin{definition}[Loi lognormale]
+La variable aléatoire $U$ suit une loi lognormale $U\sim\text{LN}(\mu,\sigma^{2})$ de densité
+$$
+f_{U}(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp\left(-\frac{(\ln(x)-\mu)^2}{2\sigma^2}\right),\text{ }x>0,
+$$
+et de fonction de survie
+$$
+\overline{F}_U(x) = 1-\Phi\left(\frac{\ln(x)-\mu}{\sigma}\right).
+$$
+On note que $U=\exp(\mu+\sigma Z)$, où $Z$ est de loi normale centrée réduite.
+\end{definition}
+\begin{prop}
+Les moments de $U\sim\text{LN}(\mu,\sigma^2)$ sont données par
+$$
+\E(U^k)=\exp\left(k\mu+k^2\frac{\sigma^2}{2}\right),\text{ }k=0,1,2\ldots,.
+$$
+\end{prop}
+\underline{preuve:} Examen?
+\begin{remark}
+\begin{enumerate}
+\item La loi lognormale admet des moments à tout ordre mais pas de fonction génératrice des moments.
+\item Plus le paramètre $\sigma$ est élevé plus la loi lognormale admet une queue lourde
+\item La loi de $U_1+U_2$ est inconnue, l'approximation de Fenton-Wilkinson \cite{fenton1960sum} consiste à approcher la somme de variables lognormale par une variable de loi lognormale dont les moments d'ordre $1$ et $2$ coincident avec ceux de la somme. Pour des méthodes plus sophistiquées voir par exemple Asmussen et al. \cite{asmussen2016orthonormal}
+\end{enumerate}
+\end{remark}
+\begin{definition}[Loi de Weibull]
+La variable aléatoire $U$ suit une loi de Weibull $U\sim\text{Weib}(\alpha,\beta)$ de densité
+$$
+f_{U}(x)=\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}e^{-(x/\beta)^\alpha},\text{ }x>0.
+$$
+et de fonction de survie
+$$
+\overline{F}_U(x) =e^{-(x/\beta)^\alpha}
+$$
+\end{definition}
+\begin{remark}
+La valeur du paramètre de forme $\alpha$ régit le comportement dans la queue de la distribution. En effet,
+\begin{itemize}
+  \item $\alpha = 1$ exponentielle
+  \item $\alpha < 1$ sous-exponentielle
+  \item $\alpha > 1$ sur-exponentielle
+\end{itemize}
+\end{remark}
+\begin{prop}
+Les moments de $U\sim\text{Weib}(\alpha,\beta)$ sont donnés par
+$$
+\E\left(U^k\right)=\beta^k\Gamma(1+k/\alpha),\text{ }k\geq0.
+$$
+\end{prop}
+\underline{preuve:} Examen.
+\begin{definition}[Loi de Pareto]
+La variable aléatoire $U$ suit une loi de Pareto $U\sim\text{Par}(\alpha,\gamma)$ de densité
+$$
+f_{U}(x)=
+\begin{cases}
+\frac{\alpha \gamma^\alpha}{x^{\alpha+1}},&\text{ }x\geq \gamma,\\
+0,&\text{ }x< \gamma,
+\end{cases}
+$$
+et
+$$
+\overline{F}_{U}(x)=
+\begin{cases}
+\left(\frac{\gamma}{x}\right)^\alpha,&\text{ }x\geq \gamma,\\
+1,&\text{ }x< \gamma.
+\end{cases}
+$$
+\end{definition}
+\begin{remark}
+\begin{enumerate}
+\item Si $\alpha \leq 1$ alors la loi de Pareto n'admet pas d'espérance, ni aucun autre moment!
+\item $X =  \gamma e^{Y/\alpha},$ où $Y\sim\text{Exp}(1)$
+\end{enumerate}
+\end{remark}
+\begin{prop}
+Supposons que nous disposions d'un échantillon de montants de sinistres $x_1,\ldots, x_n$, l'estimateur du maximum de vraisemblance de la loi de Pareto $\text{Par}(\alpha, \gamma)$ est donné par
+$$
+\widehat{\gamma}=\underset{i=1,\ldots, n}{\min}\, x_i \text{ et }\widehat{\alpha}=\frac{n}{\sum_{i=1}^n\ln(x_i/ \widehat{\gamma})}
+$$
+\end{prop}
+\underline{preuve:}\\
+Soit $X = (x_1,\ldots, x_n)$ les données disponibles, la vraisemblance du modèle s'écrit
+$$
+p(X;\alpha,\gamma)=\prod_{i=1}^{n}\frac{\alpha\gamma^{\alpha}}{x_i^{\alpha+1}}\mathbb{I}_{x_i\geq\gamma}=\alpha^ne^{n\alpha\ln(\gamma)}\prod_{i=1}^{n}\frac{\mathbb{I}_{x_i\geq\gamma}}{x_i^{\alpha+1}}.
+$$
+On remarque que nécessairement $\gamma\leq \min x_i$ sinon la vraisemblance s'annule. On remarque aussi que $p(X;\alpha,\gamma)$ est strictement croissante en $\gamma\in \left]0,\min x_i\right]$, on en déduit l'estimateur ML de $\gamma$ avec $\widehat{\gamma} =\min x_i$. Par suite, la log-vraisemblance est donnée par
+$$
+\ln(p(X;\alpha,\widehat{\gamma})) = n\ln(\alpha)+\alpha n\ln(\widehat{\gamma})-(\alpha+1)\sum_{i =1}^n\ln(x_i).
+$$
+puis
+$$
+\frac{\partial}{\partial \alpha}\ln(p(X;\alpha,\widehat{\gamma})) = 0 \Leftrightarrow \widehat{\alpha} = \frac{n}{\sum_{i =1}^n\ln(x_i/\widehat{\gamma})}.
+$$
+\begin{example}
+Si on suppose être en présence de valeurs extrêmes, une procédure de détection du seuil de valeurs extrêmes consiste à grapher la séquence
+$$
+\widehat{\alpha}=\frac{k}{\sum_{i=1}^k\ln(x_{n-i+1:n}/ x_{n-k:n})},\text{ }k = 1,\ldots, n-1.
+$$
+où $x_{1:n},\ldots, x_{n:n}$ représente les statistiques d'ordres de l'échantillon initial (soit l'échantillon initial trier par ordre croissant). Le seuil correspond à $x_{n-k:n}$ pour $k$ l'indice pour lequel l'estimateur précédent se stabilise.
+\end{example}
+
+\end{frame}
+\subsection{Les lois composites}
+\begin{frame}[allowframebreaks]
+\underline{2. Les modèles composites}\\
+
+Les modèles composites ont été introduit en modélisation des montants de sinistres pour calibrer le 'ventre' et la queue de la distribution séparément. Les données montrent souvent une occurence forte de sinistres de faible intensité et une occurence non négligeable de sinistres de forte intensité.
+\begin{definition}[Modèles composites]
+Soient $f_1, f_2$ deux densités de probabilité sur $\R_+$. Un modèle composite est défini par une densité de probabilité
+$$
+f(x) = \begin{cases}
+r\frac{f_1(x)}{F_1(\theta)}&\text{ pour }0\leq x\leq \theta,\\
+(1-r)\frac{f_2(x)}{1-F_2(\theta)}&\text{ pour } x> \theta.
+\end{cases}
+$$
+Le paramètre $\theta$ est souvent appelé \textit{attachement point} ou \textit{splicing point} auquel les conditions de régularités suivante sont imposées
+$$
+f(\theta^-  ) = f(\theta^+ )\text{ et }f'(\theta^-  ) = f'(\theta^+ ).
+$$
+Cela facilite notamment l'utilisation d'algorithme d'optimisation pour inférer les paramètre via la méthode du maximum de vraisemblance.
+\end{definition}
+\begin{example}[Modèle Weibull-Pareto]
+Le modèle composite $\text{Weib-Par}(r,k,\beta,\alpha, \theta)$ mélange une loi de Weibull de densité
+$$
+f_{1}(x)=\frac{k}{\beta}\left(\frac{x}{\beta}\right)^{k-1}e^{-(x/\beta)^k},\text{ }x>0.
+$$
+et une loi de Pareto
+$$
+f_2(x)=
+\begin{cases}
+\frac{\alpha \theta^\alpha}{x^{\alpha+1}},&\text{ }x\geq \theta,\\
+0,&\text{ }x< \theta,
+\end{cases}
+$$
+voir Scollnick and Sun \cite{scollnik2012modeling}. Les conditions de régularité
+$f(\theta^-  ) = f(\theta^+ )\text{ et }f'(\theta^-  ) = f'(\theta^+ )$ impose de fixer la valeur de deux paramètres (par rapport aux autres). Par exemple, on peut fixer $r$ et $\beta$ avec
+$$
+r = \frac{\frac{\alpha}{\theta}\left[1-\exp\left(-\frac{k+\alpha}{k}\right)\right]}{\frac{\alpha}{\theta}+\frac{k}{\theta}\exp\left(-\frac{k+\alpha}{k}\right)}\text{ et }\beta = \left(\frac{k}{k+\alpha}\right)^{1/k}\theta.
+$$
+\end{example}
+En effet, la continuité de $f$ en $\theta$ est équivalente à
+$$
+\frac{r}{1-r} = \frac{f_2(\theta)F_1(\theta)}{f_1(\theta)}
+$$
+puis on note que
+$$
+f'_1(x) =f_1(x)\left(\frac{k-1}{x}-k\frac{x^{k-1}}{\beta^k}\right), \text{ pour }x>0
+$$
+et
+$$
+f'_2(x) = -f_2(x)\frac{\alpha+1}{x}.
+$$
+La dérivabilité en $\theta$ entraine que
+$$
+\frac{r}{1-r}\frac{f'_1(\theta)}{F_1(\theta)} = f'_2(\theta)\Leftrightarrow \beta = \left(\frac{k}{k+\alpha}\right)^{1/k}\theta
+$$
+puis
+$$
+r = \frac{f_2(\theta)F_1(\theta)}{f_2(\theta)F_1(\theta)+f_1(\theta)} = \frac{\frac{\alpha}{\theta}\left[1-\exp\left(-\frac{k+\alpha}{k}\right)\right]}{\frac{\alpha}{\theta}+\frac{k}{\theta}\exp\left(-\frac{k+\alpha}{k}\right)}
+$$
+Technique de résolution qui pourrait bien s'avérer utile le jour de l'examen ...
+\begin{remark}
+Les hypothèses de régularité ne sont pas requise pour l'inférence. Deux solutions
+\begin{enumerate}
+    \item Fixer le seuil $\theta$ via le Hill estimator, et estimer séparément $f_1$ et $f_2$ à l'aide des données inférieures et supérieures à $\theta$ respectivement
+    \begin{itemize}
+        \item[$\hookrightarrow$] Le choix du seuil ne prend pas en compte la forme de la distribution pour le ventre de la distribution
+    \end{itemize}
+    \item Estimation simultanée par le maximum de vraisemblance. En pratique, le seuil $\theta$ peut être choisi parmi les observations. On considère tour à tour chaque observation comme candidat pour le seuil, inférer les paramètres de $f_1$ et $f_2$ de la même manière que dans $1$ puis comparer l'adéquation de chaque modèle via des critères d'information comme le BIC.
+\end{enumerate}
+\end{remark}
+\end{frame}
+\subsection{Les lois flexibles}
+\begin{frame}[allowframebreaks]
+\underline{3. Les modèles flexibles}\\
+\begin{definition}[Mélange de Erlang]
+La variable aléatoire $X$ admet une loi Erlang mélange $\text{M-Erl}(\boldsymbol{\pi}, \beta)$ si sa densité est donnée par
+$$
+f_{X}(x) = \sum_{i=1}^{m}\pi_{i}\frac{e^{-x/\beta}x^{z_i-1}}{\beta^{z_i}(z_i-1)!}.
+$$
+Il s'agit d'un modèle de mélange avec un variable aléatoire latente $Z\sim\pi$ de comptage de loi
+$$
+\P(Z=z_i),\text{ }z_i\in\N^{\ast}\text{ }i=1,\ldots, m.
+$$
+On a en fait $X\sim \text{Gamma}(Z,\beta)$.
+\end{definition}
+\begin{theorem}
+Les lois mélange de Erlang sont denses dans l'ensemble des distributions de $\R_+$.
+\end{theorem}
+On peut théoriquement approcher n'importe quel variable aléatoire à support sur $\R_+$ par la limite d'une suite de variables aléatoires de loi Erlang mélange, voir Tijms \cite[p. 163-164]{tijms1994stochastic} ou plus accessible et axé sur la modélisation des sinistres via la loi Erlang mélange Lee et Lin \cite{lee2010modeling}.\end{frame}
+\begin{frame}[allowframebreaks]
+L'inférence des lois de mélange s'effectue souvent via un algorithme itératif dit d'Espérance-Maximisation (EM).L'idée est d'initialiser la valeur des paramètres $\theta^{(0)} = \left(\pi^{(0)}_1,\ldots, \pi^{(0)}_m, \beta^{(0)}\right)$, puis chercher à maximiser la vraisemblance des données $X=(x_1,\ldots, x_n)$ définie par
+$$
+p(X,Z;\theta)=\prod_{k=1}^{n}p(x_k,Z;\theta)=\frac{e^{-x_k/\beta}x_{k}^{Z-1}}{\beta^{Z}(Z-1)!},
+$$
+approchée par son espérance sous la loi de conditionnelle de la variable latente $Z|X;\theta^{(0)}$ sachant les données et la valeur du paramètre.
+\begin{enumerate}
+\item Etape Espérance (E): Calcul de
+$$
+Q\left(\theta|\theta^{(0)}\right)=\E_{Z|X;\theta^{(0)}}\left\{\ln\left[p(X,Z;\theta^{(0)})\right]\right\} =\sum_{i=1}^{m}\sum_{k=1}^n\ln\left[p(x_k,z_i;\theta^{(0)})\right]\P\left(Z=z_i|x_k;\theta^{(0)}\right)
+$$
+\item Etape Maximisation (M):
+$$
+\theta^{(1)} = \begin{cases}
+\underset{\theta}{\text{argmax }} Q\left(\theta|\theta^{(0)}\right)&\\
+\text{sous la contrainte }&\sum_{i=1}^{m}\pi_i=1
+\end{cases}
+$$
+On note que
+$$
+\P\left(Z=z_i|X;\theta^{(0)}\right)=\frac{p(X,Z=z_i;\theta^{(0)})}{p(X;\theta)}=\frac{\pi^{ (0)}_{i}\frac{e^{-x/\beta^{(0)}}x^{z_i-1}}{\left(\beta^{(0)}\right)^{z_i}(z_i-1)!}}{\sum_{i=1}^{m}\pi^{ (0)}_{i}\frac{e^{-x/\beta^{(0)}}x^{z_i-1}}{\left(\beta^{(0)}\right)^{z_i}(z_i-1)!}}.
+$$
+Le Lagrangien associé à notre problème d'optimisation est donné par
+$$
+L(\pi_1,\ldots, \pi_m,\beta)= \sum_{k=1}^n\sum_{i=1}^{m}\ln\left[p(x_k,z_i;\theta)\right]\P\left(Z=z_i|x_k;\theta^{(0)}\right)-\lambda\left(\sum_{i=1}^{n}\pi_i - 1\right)
+$$
+puis $\left(\pi_1^{(1)},\ldots,  \pi_1^{(n)}, \beta^{(1)},\lambda\right)$ sont solutions du système d'équtions suivant
+$$
+\begin{cases}
+\frac{\partial}{\partial \pi_i}L(\pi_1,\ldots, \pi_m,\beta)=0&\\
+\frac{\partial}{\partial \beta}L(\pi_1,\ldots, \pi_m,\beta)=0&\\
+\sum_{i=1}^{m}\pi_i=1.&
+\end{cases}
+$$
+Comme
+\begin{eqnarray*}
+L(\pi_1,\ldots, \pi_m,\beta)&=& \sum_{k=1}^n\sum_{i=1}^{m}\left[\ln(\pi_i)-\frac{x_k}{\beta}+(z_i-1)\ln(x_k)-z_i\ln(\beta)-\ln((z-i-1)!)\right]\\
+&\times&\P\left(Z=z_i|x_k;\theta^{(0)}\right)-\lambda\left(\sum_{i=1}^{n}\pi_i - 1\right)
+\end{eqnarray*}
+alors on en déduit
+$$
+\pi^{(1)}_{i}=\frac{\sum_{k=1}^{n}\P\left(Z_i=z_i|x_k;\theta^{(0)}\right)}{n},\text{ }i =1,\ldots, m,\text{ et }
+\beta^{(1)}=\frac{\frac{1}{n}\sum_{k=1}^n x_k}{\sum_{i=1}^{m}\pi_i^{(1)}z_i}
+$$
+\end{enumerate}
+On ré-itère les etapes E et M jusqu'à convergence de l'algorithme, on peut montrer que la procédure converge bien vers un maximum local.
+\begin{remark}
+En pratique, le calibrage consiste à considérer successivement $Z=1$, $Z\in\{1,2\}$,\ldots,$Z\in\{1,2,\ldots, m\}$ puis à choisir le modèle qui minimise par exemple le BIC
+$$
+BIC(i) = -2\ln(p(X;\pi_1,\ldots, p_{i},\beta))-(i+1)\times\ln(n),\text{ }i=1,\ldots, m.
+$$
+L'algorithme d'optimisation est lancé pour différentes valeurs initiales différentes de façon à rechercher un optimum global.
+\end{remark}
+Les lois mélange de Erlang sont en fait un cas particuliers d'une famille de lois plus générales sur $\R_+$ appelées, lois phase type, voir Asmussen et al. \cite{asmussen1996fitting}.
+\begin{remark}
+Le principale défaut des lois mélange de Erlang est le suivant
+$$
+\overline{F}_X(x)\sim e^{-x/\beta},\text{ pour }x\rightarrow \infty
+$$
+Une solution est de modéliser le ventre de la distribution par une Erlang mélange dans le cadre d'un modèle composite avec une queue de distributions modéliser par une Pareto, voir Reynkens et al. \cite{reynkens2017modelling}.
+\end{remark}
+
+% \begin{definition}[Lois Phase-type]
+% Une loi Phase-Type $\text{Ph-T}(\boldsymbol{\alpha},\mathbf{T})$ est la loi du temps d'absorption d'un processus de Markov $(X_t)_{t\geq0}$ sur un espace d'état $E_\delta = E\cup\Delta$, où $\Delta$ désigne l'état absorbant.
+% \begin{itemize}
+% \item Le paramètre $\alpha$ désigne la loi initiale, il s'agit d'une loi de probabilité sur $E$
+% \item Le paramètre $T = (t_{ij})_{i,j\in E}$ est une matrice qui gouverne les transitions du processus $(X_t)_{t\geq 0}$ avant absorbtion.
+% \end{itemize}
+% \end{definition}
+
+
+
+\end{frame}
+\section{Méthode d'approximation}
+\subsection{Approximation Normale et Gamma}
+\begin{frame}[allowframebreaks]
+\underline{III. Méthodes d'approximation}\\
+\underline{1. Approximation normale et gamma}\\
+\begin{definition}[Approximation normale]
+Supposons que $N\sim\text{Pois}(\lambda)$, on note $\mu = \E(U)$ et $\sigma^2 = \V(U)$. On a donc
+$$
+\E(X) = \lambda\mu\text{ et }\V(X) = \lambda(\mu^2+\sigma^2).
+$$
+L'approximation normale consiste à approcher la loi de
+$$
+Z = \frac{X-\lambda \mu}{\sqrt{\lambda(\sigma^2+\mu^2)}}
+$$
+par une loi normale centrée réduite. La fonction de répartition de $X$ est donnée par
+$$
+\P(X\leq x) \approx \phi\left(\frac{x-\lambda\mu}{\sqrt{\lambda(\sigma^2+\mu^2)}}\right)
+$$
+Cette approximation est d'autant meilleure que $\lambda\rightarrow \infty$.
+\end{definition}
+
+\begin{definition}[Approximation Gamma]
+L'approximation gamma consiste à approcher $X$ par une variable aléatoire de loi gamma translatée $V\sim T-\Gamma(\alpha,\beta, w_0)$ définie par
+$$
+V = w_0 + W
+$$
+où $W\sim \Gamma(\alpha, \beta)$ en faisant correspondre les moments de $X$ et $V$ jusqu'à l'ordre $3$.  En notant $\mu_3(X) :=\E\left\{[X-\E(X)]^3\right\}$, on a
+$$
+\beta = \frac{\mu_3(X)}{2\V(X)},\text{ }\alpha = \frac{4\V(X)^3}{\mu_3(X)^2},\text{ et }w_0 = \E(X) - 2\frac{\V(X)^2}{\mu_3(X)}
+$$
+\end{definition}
+\begin{remark}
+Chacune des deux méthodes peut-être utilisées dans un contexte où des données sur la fréquence et les montants de sinistre sont disponibles. On remplace simplement $\E(X)$ et $\V(X)$ ou ($\lambda$, $\mu$ et $\sigma^2$) par leur contrepartie empirique. A noter que le moment centré d'ordre $3$ est une quantité très volatile et qu'un estimateur fiable nécessite une grande quantité de données.
+\end{remark}
+
+\end{frame}
+\subsection{Algorithme de Panjer}
+\begin{frame}[allowframebreaks]
+\underline{2. Algorithme de Panjer}\\
+\begin{definition}[Famille de Panjer]
+La distribution d'une variable de comptage $N$ appartient à la famille de Panjer si elle vérifie
+$$
+p_N(n) = \left(a+\frac{b}{n}\right)p_{N}(n-1), \text{ }n = 1,2,\ldots
+$$
+où $a<1$ et $b\in \R$.
+\end{definition}
+\begin{prop}[Sundt $\&$ Jewell \cite{sundt1981further}]
+Si $N$ est dans la famille de Panjer alors
+\begin{itemize}
+    \item $N\sim\text{Pois}(\lambda)$, avec $a = 0$ et $ \lambda=b$
+    \item $N\sim\text{Neg-Bin}(\alpha, p)$, avec $p= a$ et $\alpha = 1+bp^{-1}$
+    \item $N\sim \text{Bin}(n,p)$, avec $p = a(a-1)^{-1}$ et $n = -1-ba^{-1}$
+\end{itemize}
+\end{prop}
+\begin{definition}[Algorithme de Panjer \cite{Pa81}]
+Si $U$ est une variable aléatoire de comptage alors $X$ est aussi une variable aléatoire de compatge dont la loi de probabilité vérifie
+$$
+p_X(k)=
+\begin{cases}
+G_N\left[p_U(0)\right]& \text{ pour }k = 0\\
+\frac{1}{1-ap_U(0)}\sum_{j = 1}^{k}\left(a+b\frac{j}{k}\right)p_U(j)p_X(k-j)& \text{ pour }k \geq1.
+\end{cases}
+$$
+\end{definition}
+La preuve sera faite en TD et l'application dans le devoir maison en python!
+\begin{remark}[Discrétisation de la loi des montants]
+L'hypothèse des montants de sinsitres à valeurs entières est un peu contraignante. L'algorithme de Panjer fourni une méthode d'approximation via une dsicrétisation de la loi des montants. Un schéma de discrétisation classique est le suivant
+$$
+p_U(kh) = \begin{cases}
+F_U(h/2),&\text{ pour }k = 0,\\
+F_U(kh+h/2)- F_U(kh-h/2),&\text{ pour }k \geq1.
+\end{cases}
+$$
+\end{remark}
+\end{frame}
+\subsection{Fast Fourier Transform}
+\begin{frame}[allowframebreaks]
+\underline{3. Fast Fourier Transform}\\
+La méthode \textit{Fast Fourier Transform} est motivée par deux faits
+\begin{itemize}
+    \item l'accessibilité des transformées (de Laplace ou de Fourier) de $X$
+    \item le besoin d'optimiser les temps de calculs trop long dans le cadre de l'algorithme de Panjer
+\end{itemize}
+La procédure retrouve exactement la distribution de $X$ si les montants de sinistres sont des variables aléatoires discrètes à support fini. $X$ est alors discrètes à support sur $\N$ que l'on va tronquer à l'ordre $n$ (support sur $\{0,\ldots, n\}$ sans perte de généralité) et sa transformée de Fourier est donnée par
+$$
+M_X(is) = \sum_{k = 0}^n p_X(k)e^{is_k},\text{ }s\in \R.
+$$
+La méthode FFT permet d'évaluer les $p_X(k)$ sur la base de l'évaluation de la transformée de Fourier sur une grille de points définie par
+$$
+s_k = \frac{2\pi k}{n+1},\text{ }k = 0, \ldots, n.
+$$
+puis la résolution du système linéaire suivant
+$$
+\begin{cases}
+M_X(i s_0)=&\sum_{i = 1}^{n}e^{i s_0 k}p_X(k)\\
+\vdots&\vdots\\
+M_X(i s_{n})=&\sum_{i = 1}^{n}e^{i s_{n} k}p_X(k)\\
+\end{cases}
+$$
+ce qui se ré-écrit matriciellement
+$$
+M_X^T = F p_X^T
+$$
+où $M_X = (M_X(i s_0),\ldots, M_X(i s_n))$, $p_X=(p_X(0),\ldots, p_X(n))$ et
+$$
+F =\left(e^{kis_l}\right)_{k,l=0,\ldots, n}=
+\left(
+\begin{array}{cccc}
+e^{0\times is_0}&1&\ldots&e^{0\times is_n}\\
+e^{is_0}&e^{is_1}&\ldots&e^{ is_n}\\
+\vdots&\ddots&\ddots&\vdots\\
+e^{nis_0}&e^{is_1}&\ldots&e^{ nis_n}\\
+\end{array}
+\right)
+$$
+La matrice $F$ s'inverse aisément (matrice transconjuguée ou adjointe) avec
+$$
+F^{-1} = \frac{1}{n+1}\left(e^{- lis_k}\right)_{k,l=0,\ldots, n}.
+$$
+Une comparaison entre l'algorithme de Panjer et la méthode FFT est effectuée dans le papier de Embrecht et Frei \cite{embrechts2009panjer}.
+\end{frame}
+\subsection{Développement polynomial}
+\begin{frame}[allowframebreaks]
+
+\underline{4. Développement polynomial}\\
+Des méthodes plus récentes s'affranchissent de la discrétisation des sinistres, on pourra consulter par exemple Goffard and Laub \cite{Goffard2020}. On note 
+$$
+\gamma_{(r,m)}(x) = \frac{e^{-x/m}x^{r-1}}{m^r\Gamma(r)}
+$$
+la densité de la loi gamma et 
+$$
+Q_n(x) = (-1)^n\binom{n+r-1}{n-i}^{-1/2}\sum_{i=0}^{n}\binom{n+r-1}{n-i}\frac{(-x)i}{i!}\text{ }n\geq0,
+$$ 
+Une suite de polynômes orthogonaux au sens où
+$$
+\int Q_n(x)Q_m(x)\gamma_{(r,m)}(x)\text{d}x = \begin{cases}
+1,&\text{ si }n=m,\\
+0, &\text{ sinon.}
+\end{cases}
+$$
+$(Q_n)_{n\geq0}$ forme un système orthonormal de fonctions pour l'espace des fonction de carré intégrable contre la mesure gamma, noté $\mathcal{L}^2_{\gamma_{(r,m)}}$. 
+\begin{prop}
+Si $f_X^+ / \gamma_{(r,m)}\in \mathcal{L}^2_\gamma$ alors 
+$$
+f_X^+(x) \approx \sum_{i = 0}^{K}p_i\gamma_{(r+i,m)}(x).  
+$$ 
+On a également 
+$$
+\overline{F}_X(x) \approx \sum_{i = 0}^{K}p_i\overline{F}_{\gamma_{(r+i,m)}}(x),  
+$$ 
+et 
+$$
+\mathbb{E}[(X-a)_+] \approx \sum_{i = 0}^{K}p_i[m(r+i)\overline{F}_{\gamma_{(r+i+1,m)}}(a)-a\overline{F}_{\gamma_{(r+i,m)}}(a)].  
+$$ 
+Les coefficients du développement sont données par 
+$$
+p_i = \sum_{i = 1}^Kq_k(-1)^{i+k}/[i!(k-i)!]\sqrt{k!\Gamma(k+r)/\Gamma(r)}\text{, }i\leq K,
+$$
+où $q_k =\mathbb{E}[Q_k(X)],$ $k\geq0$.
+\end{prop}
+\underline{preuve:}\\
+Comme $f_X^+ / \gamma_{(r,m)}\in \mathcal{L}^2_\gamma$ alors 
+$$
+\frac{f_X^+(x)}{\gamma_{(r,m)}(x)} = \sum_{k = 0}^{+\infty}q_kQ_k(x), 
+$$
+avec 
+$$
+q_k = \left<\frac{f_X^+(x)}{\gamma_{(r,m)}}, Q_k\right> = \int \frac{f_X^+(x)}{\gamma_{(r,m)}(x)}Q_k(x)\gamma_{(r,m)}(x)\text{d}x = \mathbb{E}[Q_k(X)]
+$$
+La densité $f_X^+$ est alors approchée par simple troncature à l'ordre $K$
+$$
+f_X^+(x) \approx \sum_{k = 0}^{K}q_kQ_k(x)\gamma_{(r,m)}(x), 
+$$
+En ré-injectant l'expression des polynômes $Q_n$ dans l'équation et en ré-arrangeant les sommes, on trouve que 
+$$
+f_X^+(x) \approx \sum_{i = 0}^{K}p_i\gamma_{(r+i,m)}(x), 
+$$
+où
+$$
+p_i = \sum_{i = 1}^Kq_k(-1)^{i+k}/[i!(k-i)!]\sqrt{k!\Gamma(k+r)/\Gamma(r)}\text{, }i\leq K. 
+$$
+On intègre l'expression ci dessus pour obtenir les approximations de $F_X$ et $\mathbb{E}(X-a)_+$
+\begin{remark}
+\begin{enumerate}
+    \item $m$ est choisit pour s'assurer que L'hypothèse $\frac{f_X^+(x)}{\gamma_{(r,m)}(x)}$ est vérifié, $r$ est ensuite obtenu par comparaison des moments d'ordres $1$
+    \item L'hypothèse $\frac{f_X^+(x)}{\gamma_{(r,m)}(x)}$ restreint l'application de la méthode aux distributions ayant une fonction génératrice des moments bien définie. On peut s'en affranchir en approchant la version tiltée de $f_X^+$ donnée par 
+    $$
+    f_{\theta}(x)=\frac{e^{-\theta x}f_X^+(x)}{\int_{0}^{\infty}e^{-\theta x}f_X^+(x)\text{d}x}
+    $$ 
+\end{enumerate}
+
+\end{remark}
+\end{frame}
+\begin{frame}[allowframebreaks]{Références bibliographiques}
+Mes notes s'inspirent des notes de Stéphane Loisel \cite{Lo19}
+\bibliographystyle{plain}
+\bibliography{MCS_notes}
+\end{frame}
+\end{document}

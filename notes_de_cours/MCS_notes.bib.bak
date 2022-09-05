@@ -1,0 +1,237 @@
+% Encoding: UTF-8
+
+@article{lee2010modeling,
+	Author = {Lee, Simon CK and Lin, X Sheldon},
+	Date-Added = {2019-10-13 12:52:55 +0000},
+	Date-Modified = {2019-10-13 12:52:55 +0000},
+	Journal = {North American Actuarial Journal},
+	Number = {1},
+	Pages = {107--130},
+	Publisher = {Taylor \& Francis},
+	Title = {Modeling and evaluating insurance losses via mixtures of Erlang distributions},
+	Volume = {14},
+	Year = {2010}}
+
+@book{tijms1994stochastic,
+	Author = {Tijms, Henk C and Tijms, Henk C},
+	Date-Added = {2019-10-13 12:52:02 +0000},
+	Date-Modified = {2019-10-13 12:52:02 +0000},
+	Publisher = {John Wiley \& Sons Chichester},
+	Title = {Stochastic models: an algorithmic approach},
+	Volume = {994},
+	Year = {1994}}
+
+@article{asmussen2016orthonormal,
+	Author = {Asmussen, S{\o}ren and Goffard, Pierre-Olivier and Laub, Patrick J},
+	Date-Added = {2019-10-05 15:31:48 +0000},
+	Date-Modified = {2019-10-05 15:34:05 +0000},
+	Journal = {Risk and Stochastics},
+	Publisher = {World Scientific},
+	Title = {Orthonormal polynomial expansions and lognormal sum densities},
+	Year = {2019}}
+
+@article{fenton1960sum,
+	Author = {Fenton, Lawrence},
+	Date-Added = {2019-10-05 15:26:25 +0000},
+	Date-Modified = {2019-10-05 15:26:25 +0000},
+	Journal = {IRE Transactions on Communications Systems},
+	Number = {1},
+	Pages = {57--67},
+	Publisher = {IEEE},
+	Title = {The sum of log-normal probability distributions in scatter transmission systems},
+	Volume = {8},
+	Year = {1960}}
+
+@inbook{Ka65,
+	Address = {Pergamon Press, Oxford},
+	Author = {L. Katz},
+	Publisher = {in: Classical and Contagious Discrete Distributions},
+	Title = {Unified treatment of a broad class of discrete probability distributions},
+	Year = {1965}}
+
+@article{DuGoPi08,
+	Author = {C.Dutang and V. Goulet and M. Pigeon},
+	Journal = {Journal of Statistical Software},
+	Number = {7},
+	Pages = {38},
+	Title = {actuar: An R Package for Actuarial Science},
+	Url = {http://www.jstatsoft.org/v25/i07},
+	Volume = {25},
+	Year = {2008},
+	Bdsk-Url-1 = {http://www.jstatsoft.org/v25/i07}}
+
+@article{MNATSAKANOV20138730,
+	Author = {Robert M. Mnatsakanov and Khachatur Sarkisian},
+	Doi = {http://dx.doi.org/10.1016/j.amc.2013.02.057},
+	Issn = {0096-3003},
+	Journal = {Applied Mathematics and Computation},
+	Keywords = {Moment-recovered approximation, Laplace transform inversion, Compound distribution},
+	Number = {16},
+	Pages = {8730 - 8737},
+	Title = {A note on recovering the distributions from exponential moments},
+	Url = {http://www.sciencedirect.com/science/article/pii/S0096300313001951},
+	Volume = {219},
+	Year = {2013},
+	Bdsk-Url-1 = {http://www.sciencedirect.com/science/article/pii/S0096300313001951},
+	Bdsk-Url-2 = {http://dx.doi.org/10.1016/j.amc.2013.02.057}}
+
+@article{Pa81,
+	Author = {H. H. Panjer},
+	Doi = {10.1017/S0515036100006796},
+	Journal = {ASTIN Bulletin},
+	Number = {1},
+	Pages = {22--26},
+	Publisher = {Cambridge University Press},
+	Title = {Recursive Evaluation of a Family of Compound Distributions},
+	Volume = {12},
+	Year = {1981},
+	Bdsk-Url-1 = {https://dx.doi.org/10.1017/S0515036100006796}}
+
+@article{DP86,
+	Author = {N. De Pril},
+	Date-Modified = {2019-04-29 14:06:01 +0000},
+	Doi = {10.1080/03461238.1986.10413800},
+	Eprint = {http://dx.doi.org/10.1080/03461238.1986.10413800},
+	Journal = {Scandinavian Actuarial Journal},
+	Number = {2},
+	Pages = {117-120},
+	Title = {Moments of a class of compound distributions},
+	Url = {http://dx.doi.org/10.1080/03461238.1986.10413800},
+	Year = {1986},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1080/03461238.1986.10413800}}
+
+@inbook{RoScScTe08,
+	Author = {Rolski, T. and Schmidli, H. and Schmidt, V. and Teugels, J.},
+	Booktitle = {Stochastic Processes for Insurance \& Finance},
+	Date-Modified = {2019-04-29 14:07:15 +0000},
+	Doi = {10.1002/9780470317044.ch5},
+	Isbn = {9780470317044},
+	Keywords = {risk processes, aggregate claim, discrete-time risk reserve process, ruin probability, claim surplus process},
+	Pages = {147--204},
+	Publisher = {John Wiley \& Sons, Inc.},
+	Title = {Stochastic Processes for Insurance \& Finance},
+	Url = {http://dx.doi.org/10.1002/9780470317044.ch5},
+	Year = {2008},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1002/9780470317044.ch5}}
+
+@article{Su02,
+	Author = {B. Sundt},
+	Doi = {https://doi.org/10.1016/S0167-6687(02)00123-3},
+	Issn = {0167-6687},
+	Journal = {Insurance: Mathematics and Economics},
+	Keywords = {Aggregate claims distributions, Recursions, Approximations, Error bounds},
+	Number = {3},
+	Pages = {297 - 322},
+	Title = {Recursive evaluation of aggregate claims distributions},
+	Url = {http://www.sciencedirect.com/science/article/pii/S0167668702001233},
+	Volume = {30},
+	Year = {2002},
+	Bdsk-Url-1 = {http://www.sciencedirect.com/science/article/pii/S0167668702001233},
+	Bdsk-Url-2 = {https://doi.org/10.1016/S0167-6687(02)00123-3}}
+
+@unpublished{Lo19,
+	Author = {S. Loisel},
+	Title = {Notes de cours: Mod{\'e}lisation charge sinistre}}
+
+@article{depril_1989,
+	Author = {De Pril, Nelson},
+	Doi = {10.2143/AST.19.1.2014913},
+	Journal = {ASTIN Bulletin},
+	Number = {1},
+	Pages = {9--24},
+	Publisher = {Cambridge University Press},
+	Title = {The Aggregate Claims Distribution in the Individual Model with Arbitrary Positive Claims},
+	Volume = {19},
+	Year = {1989},
+	Bdsk-Url-1 = {https://dx.doi.org/10.2143/AST.19.1.2014913}}
+
+@article{embrechts2009panjer,
+	Author = {Embrechts, Paul and Frei, Marco},
+	Journal = {Mathematical Methods of Operations Research},
+	Number = {3},
+	Pages = {497--508},
+	Publisher = {Springer},
+	Title = {Panjer recursion versus FFT for compound distributions},
+	Volume = {69},
+	Year = {2009}}
+
+@phdthesis{goffard2015approximations,
+	Author = {Goffard, Pierre-Olivier},
+	School = {Aix-Marseille},
+	Title = {Approximations polynomiales de densit{\'e}s de probabilit{\'e} et applications en assurance},
+	Year = {2015}}
+
+@article{sundt1981further,
+	Author = {Sundt, Bj{\o}rn and Jewell, William S},
+	Journal = {ASTIN Bulletin: The Journal of the IAA},
+	Number = {1},
+	Pages = {27--39},
+	Publisher = {Cambridge University Press},
+	Title = {Further results on recursive evaluation of compound distributions},
+	Volume = {12},
+	Year = {1981}}
+
+@article{bakar2015modeling,
+	Author = {Bakar, SA Abu and Hamzah, Nor A and Maghsoudi, Mastoureh and Nadarajah, Saralees},
+	Journal = {Insurance: Mathematics and Economics},
+	Pages = {146--154},
+	Publisher = {Elsevier},
+	Title = {Modeling loss data using composite models},
+	Volume = {61},
+	Year = {2015}}
+
+@article{scollnik2012modeling,
+	Author = {Scollnik, David PM and Sun, Chenchen},
+	Journal = {North American Actuarial Journal},
+	Number = {2},
+	Pages = {260--272},
+	Publisher = {Taylor \& Francis},
+	Title = {Modeling with weibull-pareto models},
+	Volume = {16},
+	Year = {2012}}
+
+@article{reynkens2017modelling,
+	Author = {Reynkens, Tom and Verbelen, Roel and Beirlant, Jan and Antonio, Katrien},
+	Journal = {Insurance: Mathematics and Economics},
+	Pages = {65--77},
+	Publisher = {Elsevier},
+	Title = {Modelling censored losses using splicing: A global fit strategy with mixed Erlang and extreme value distributions},
+	Volume = {77},
+	Year = {2017}}
+
+@article{asmussen1996fitting,
+	Author = {Asmussen, S{\o}ren and Nerman, Olle and Olsson, Marita},
+	Journal = {Scandinavian Journal of Statistics},
+	Pages = {419--441},
+	Publisher = {JSTOR},
+	Title = {Fitting phase-type distributions via the EM algorithm},
+	Year = {1996}}
+
+@Article{Goffard2020,
+  author    = {Pierre-Olivier Goffard and Patrick J. Laub},
+  title     = {Orthogonal polynomial expansions to evaluate stop-loss premiums},
+  journal   = {Journal of Computational and Applied Mathematics},
+  year      = {2020},
+  volume    = {370},
+  pages     = {112648},
+  month     = {may},
+  doi       = {10.1016/j.cam.2019.112648},
+  publisher = {Elsevier {BV}},
+}
+
+@Article{,
+}
+
+@Article{Goffard2021,
+  author    = {Pierre-Olivier Goffard and Patrick J. Laub},
+  journal   = {Insurance: Mathematics and Economics},
+  title     = {Approximate Bayesian Computations to fit and compare insurance loss models},
+  year      = {2021},
+  month     = {sep},
+  pages     = {350--371},
+  volume    = {100},
+  doi       = {10.1016/j.insmatheco.2021.06.002},
+  publisher = {Elsevier {BV}},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

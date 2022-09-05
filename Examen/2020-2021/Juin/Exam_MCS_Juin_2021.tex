@@ -1,0 +1,283 @@
+\documentclass[11pt,addpoints,answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234} 
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2020-2021}
+\def\course{Modélisation Charge Sinistre}
+\def\title{\MakeUppercase{Examen de deuxième session}}
+\def\name{Pierre-O Goffard}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item \underline{Document autorisé:} Une feuille manuscrite recto-verso
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+N'hésitez pas à utiliser le résultat des questions précédentes pour répondre à la question courante.
+\begin{questions}
+\question \textbf{Etude de la loi semi-gaussienne}\\
+
+Le montant des sinistres est distribué comme une variable aléatoire continue et positive de loi semi-gaussienne $U\sim \text{SN}(\sigma)$ définie comme $U = |X|$ (valeur absolue de $X$) avec $X$ de loi normale centrée $X\sim\text{N}(0,\sigma^2)$.
+\begin{parts}
+\part[2] Montrer que la densité de $U$ est donnée par  
+$$
+f_U(x)=
+\begin{cases}
+\frac{\sqrt{2}}{\sigma\sqrt{\pi}}\exp\left(-\frac{x^2}{2\sigma^2}\right),&x>0,\\
+0,&\text{ Sinon}.
+\end{cases}
+$$
+\begin{solution}
+On observe que 
+$$
+F_U(x) = \mathbb{P}(-x\leq X\leq x) = F_X(x) - F_X(-x)
+$$
+puis on dérive par rapport à $x$.
+\end{solution}
+\part[2] Calculer l'espérance et la variance de $U$ (détailler les calculs)
+\begin{solution}
+$\mathbb{E}(U)=\frac{\sigma\sqrt{2}}{\sqrt{\pi}}$, et  $\mathbb{V}(U)=\sigma^2\left(1-\frac{2}{\pi}\right)$. 
+\end{solution}
+\end{parts}
+\question[2] \textbf{Estimation paramétrique de la loi semi-gaussienne}\\
+
+On souhaite calibrer un modèle semi gaussien $\text{IG}(\sigma)$ à notre historique de données
+$$(u_1,\ldots, u_n).$$ 
+Donner l'expression d'un estimateur $\widehat{\sigma}$ de $\sigma$ par la méthode des moments. Quelle est la loi de cette estimateur lorsque le nombre d'observation est grand et pourquoi?
+\begin{solution}
+ Méthode des moments 
+	$$
+\widehat{\sigma} = \frac{\sqrt{\pi}\sum_{i = 1}^n u_i}{\sqrt{2}n}
+	$$
+L'estimateur suit une loi normale lorsque la taille de l'échantillon grandit, par application du théorème centrale limite.
+
+\end{solution}
+
+\question[2] \textbf{Pros and cons de la distribution semi gaussienne}\\
+Quels sont selon vous les inconvénients/avantages de cette loi semi Gaussienne pour modéliser des montants de sinistres?
+\begin{solution}
+Avantage
+\begin{itemize}
+	\item Stabilité par convolution, une somme de variables aléatoires de loi demi gaussienne suit une loi demi gaussienne
+	\item Estimation simple via la méthode des moments, de plus la loi de l'estimateur est connu ce qui est pratique pour la construction d'intervalle de confiance.  
+\end{itemize}
+Inconvénient
+\begin{itemize}
+	\item La loi demi gaussienne est une distribution à queue légère, ce qui peut être génant pour la modélisation des sinistres de forte intensité.
+\end{itemize}
+\end{solution}
+\question \textbf{Modèle Poisson mélange pour la loi de la fréquence des sinistres}\\
+La fréquence des sinistres $N$ suit une loi Poisson zéro-inflatée $N\sim\text{ZI-Pois}(p,\lambda)$ définie par
+$$
+N = I\cdot M,
+$$
+où $I\sim\text{Bin}(1, p)$ et $M\sim\text{Pois}(\lambda)$ sont deux variables aléatoires indépendantes. 
+\begin{parts}
+\part[2] Donner la moyenne et la variance de $N$ en justifiant
+\begin{solution}
+La moyenne est donnée par
+$$
+\E(N) = \E(I\cdot M) = \E(I)\E(M) = p\cdot\lambda 
+$$
+et la variance par 
+$$
+\V(N) = \V(\E(I\cdot M| I ) + \E(\V(I\cdot M| I )) = \V(I)\E(M)^2 + \E(I) \V(M) = p(1-p)\lambda^2 + p\lambda     
+$$
+
+\end{solution}
+\part[2] Donner la fonction génératrice des probabilités de $N$ définie par 
+$$
+G_N(s)=\mathbb{E}(s^N),\text{ }s\in\mathbb{R}.
+$$
+\begin{solution}
+$$
+G_N(s) =  1-p + p\exp[\lambda(s-1)]
+$$
+\end{solution}
+\part[1] Quel est l'intérêt d'un tel modèle par rapport à une loi de Poisson simple?
+\begin{solution}
+Plus de paramètres donc plus de flexibilité que la loi de Poisson, plus grande occurence de zéros.
+\end{solution}
+\end{parts}
+\question \textbf{Modèle collectif avec des montants de sinistres de loi semi gaussienne et une fréquence de sinistre de loi Poisson mélange}\\
+
+La charge totale associée à un portefeuille de contrats d'assurance non vie est modèlisé à l'aide d'un modèle collectif 
+$$
+X = \sum_{i = 1}^{N}U_i.
+$$
+pour lequel le nombre de sinistre suit une loi Poisson zéro-inflatée $\text{ZI-Pois}(p, \lambda)$ et le montant des sinsitres par une loi semi gaussienne $U\sim\text{SN}(\sigma)$. 
+
+\begin{parts}
+\part[2] Calculer la moyenne et la variance de $X$ en fonction de $\sigma, p$ et $\lambda$.
+\begin{solution}
+On applique les formules du cours 
+$$
+\mathbb{E}(X_{\text{col}}) =\mathbb{E}(N)\mathbb{E}(U) = p\lambda\frac{\sqrt{2}}{\sqrt{\pi}}\sigma, 
+$$
+et
+$$
+\mathbb{V}(X_{\text{col}}) = \mathbb{E}(N)\mathbb{V}(U) + \mathbb{V}(N)\mathbb{E}(U)^2 = p\lambda\sigma\left(1-\frac{2}{\pi}\right) + ( p(1-p)\lambda^2 + p\lambda  )\frac{2}{\pi}\sigma^2
+$$
+\end{solution}
+\part[2] Donner l'approximation normale de la fonction de répartition de $X$ en fonction de $\sigma$, $p, \lambda$ et $\phi$ la fonction de répartition de la loi normale $\text{N}(0,1)$.
+\begin{solution}
+$$
+F_X(x)\approx \phi\left(\frac{x- p\lambda\frac{\sqrt{2}}{\sqrt{\pi}}\sigma }{p\lambda\sigma\left(1-\frac{2}{\pi}\right) + ( p(1-p)\lambda^2 + p\lambda  )\frac{2}{\pi}\sigma^2}\right) 	
+$$
+\end{solution}
+\part[2] Cette méthode d'approximation est elle adaptée? Proposer une méthode d'approximation alternative et détailler sa mise en oeuvre. 
+\begin{solution}
+Non, car la loi de la fréquence des sinistres n'est pas Poisson, on peut utiliser l'approximation gamma ou la méthode FFT (pas l'algorithme de Panjer)
+\end{solution}
+
+\end{parts}
+
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomial & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Geometric & $\Geom(p)$ & $(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ & $\frac{pe^t}{1-(1-p)e^t}$ pour  $t<-\ln(1-p)$\\
+\hline
+Uniform & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponential & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Normal & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+\bibliographystyle{plain}
+\bibliography{IG_distribution}
+\end{document}

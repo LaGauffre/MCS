@@ -1,0 +1,177 @@
+\documentclass[11pt, addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2019-2020 }
+\def\course{TDs Modélisation Charge Sinistre }
+\def\title{\MakeUppercase{Rappels et bases}}
+\def\name{Romain Gauchon}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Romain Gauchon\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+
+
+
+
+\smallskip
+
+\begin{questions}
+\question 
+\textbf{Fonctions caractéristiques:}
+	\begin{parts}
+		\part  Rappeler la définition et les principales propriétés des fonctions caractéristiques $\Phi_{X}$.
+
+		\part Montrer que si $X$ et $Y$ suivent des lois de Poisson indépendantes de paramètres $\lambda_{1}$ et $\lambda_{2}$, alors $X+Y$ suit une loi de Poisson de paramètre $\lambda_{1} + \lambda_{2}$.
+
+	\end{parts}
+ 
+
+
+\question
+\textbf{Transformée de Laplace et fonction génératrice des probabilités}
+
+\begin{parts}
+	\part Soit $X$ une variable aléatoire continue positive de densité $f$. Rappeler la définition et les principales propriétés de la transformée de Laplace $L_{X}$. 
+
+	\part Soit $N$ une variable aléatoire discrète. Rappeler la définition et les principales propriétés de la fonction génératrice des probabilités $G_{N}$.
+
+	\part Soit $(X_{i})$ une famille de va iid continues positives de densité $f$, indépendantes de $N$. Soit $S = \sum_{i=1}^{N} X_{i}$. Montrer que $L_{S} = G_{N} \circ L_{f}$.
+
+\end{parts}	
+	
+\question \textbf{Lien variance / variance conditionnelle}
+
+Soit $X$, $Y$ deux va discrètes. Montrer que $$V(X) = - \E(X)^{2} + \sum_{i = 0}^{\infty} \bP(Y = y_{i}) (V(X \vert Y = y_{i}) + \E(X \vert Y = y_{i})^{2}).$$
+
+
+
+\question \textbf{Modèle de Poisson composé}
+
+Soit $(X_{i})$ une famille de va iid de loi exponentielle de paramètre $\theta$ et de densité $f_{X}(x) = \theta e^{- \theta x}$ pour tout $x \geq 0$. Soit $N$ une variable aléatoire suivant une loi de Poisson de paramètre $\lambda$ indépendante des autres variables aléatoires. Calculer la fonction de répartition de $S = \sum_{i=1}^{N} X_{i}$.
+
+
+\question \textbf{Décomposition de la variance}
+
+	\begin{parts}
+		\part  Rappeler la formule de décomposition de la variance.
+
+		\part Appliquer la formule de décomposition de la variance à $S=\sum_{i=0}^{N}X_{i}$, avec $N$ une variable aléatoire discrète positive et $(X)_{i \in \mathbb{N}}$ une famille de variables aléatoires positives i.i.d. . Quelle partie correspond à la variabilité de la fréquence des sinistres ?
+
+	\end{parts}
+
+
+
+\end{questions}
+
+
+
+
+\renewcommand\arraystretch{3.5}
+
+
+
+\end{document}
+
+%%%% Extra problems %%%%--------------------------------------
+
+%\question A coin having probability $0.8$ of landing on heads is flipped.  $A$ observes the result -- either heads or tails -- and rushes off to tell $B$. However, with probability $0.4$, $A$ will have forgotten the result by the time he reaches $B$.  If $A$ has forgotten, then, rather than admitting this to $B$, he is equally likely to tell $B$ that the coin landed on heads or that it landed tails. (If he does remember, then he tells $B$ the correct result).
+%\begin{parts}
+%	\part What is the probability that $B$ is told that the coin landed on heads?
+%	\part What is the probability that $B$ is told the correct result?
+%	\part Given that $B$ is told that the coin landed on heads, what is the probability that it did in fact land on heads?
+%\end{parts}
+
+%\question % Variance, expected value
+%Suppose that $\bP(X=0)=1-\bP(X=1)$.  If $\E[X]=3\Var(X)$, find $\bP(X=0)$.

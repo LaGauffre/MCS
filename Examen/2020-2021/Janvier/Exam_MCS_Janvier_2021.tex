@@ -1,0 +1,316 @@
+\documentclass[11pt,addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2020-2021}
+\def\course{Modélisation Charge Sinistre}
+\def\title{\MakeUppercase{Examen Final}}
+\def\name{Pierre-O Goffard}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item \underline{Document autorisé:} Une feuille manuscrite recto-verso
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+N'hésitez pas à utiliser le résultat des questions précédentes pour répondre à la question courante.
+\begin{questions}
+\question \textbf{Etude de la loi Inverse Gaussienne}\\
+
+Le montant des sinistres est distribué comme une variable aléatoire continue et positive de loi Inverse Gaussienne $U\sim \text{IG}(\mu, \tau)$ de densité par rapport à la mesure de Lebesgue donnée par
+$$
+f_{U}(x) =\begin{cases}
+\sqrt{\frac{\tau}{2\pi x^3 }}\exp\left(-\frac{\tau(x-\mu)^2}{2\mu^2x}\right),&\text{ pour }x>0,\\
+0,&\text{sinon}.
+\end{cases}
+$$
+La fonction de répartition de $U$ est donnée par 
+$$
+F_U(x) = \mathbb{P}(U\leq x) = \overline{\phi}\left[\sqrt{\frac{\tau}{x}}\left(1-\frac{x}{\mu}\right)\right]+e^{2\tau/\mu}\overline{\phi}\left[\sqrt{\frac{\tau}{x}}\left(1+\frac{x}{\mu}\right)\right],
+$$
+où $\overline{\phi}$ désigne la fonction de survie de la loi normal $\mathcal{N}(0,1)$. On pourra se référer au travail de Shuster \cite{Shuster1968} pour la preuve.
+\begin{parts}
+\part[2] Montrer que la fonction génératrice des moments de $U\sim IG(\mu,\mu^2)$ est donnée par
+$$
+M_U(s) = \E(e^{sU}) = \exp\left[\mu\left(1-\sqrt{1- 2s}\right) \right],\text{ }s\geq0.
+$$
+\underline{Indication:} Faire apparaître dans l'intégrale une densité inverse Gaussienne (dont l'intégrale sur $\mathbb{R}_+$ vaut $1$). 
+\begin{solution}
+Par définition de la fonction génératrice des moments 
+\begin{eqnarray*}
+M_U(s) &= &\int_{0}^{+\infty}e^{sx}\frac{\mu}{\sqrt{2\pi x^3}}\exp\left[-\frac{(x-\mu)^2}{2x}\right]\text{d}x\\
+&=&\exp\left[\mu\left(1-\sqrt{1- 2s}\right) \right] \int_{0}^{+\infty}\frac{\mu}{\sqrt{2\pi x^3}}\exp\left[-\frac{1-2s}{2x}\left(x-\frac{\mu}{\sqrt{1-2s}}\right)^2\right]\text{d}x
+\end{eqnarray*}
+On reconnait dans l'intégrale la densité de la loi $\text{IG}\left(\frac{\mu}{\sqrt{1-2s}},\mu^2\right)$
+\end{solution}
+\part[2] En déduire l'espérance et la variance de $U$.
+\begin{solution}
+On évalue $M_U'(0) = \mathbb{E}(U)=\mu$, $M_U''(0) =\mathbb{E}(U^2)=\mu^2+\mu $ puis $\mathbb{V}(U)=\mu$. 
+\end{solution}
+\part[1] Soit $U_1,\ldots, U_n$ une suite de variables aléatoire i.i.d. de loi $\text{IG}(\mu, \mu^2)$. Donner, en justifiant la loi de $Z = \sum_{i=1}^n U_i$
+\begin{solution}
+La fonction génératrice des moments de $Z$ est donnée par 
+$$
+M_Z(s) = \mathbb{E}(e^{sZ}) = M_U(s)^n =  \exp\left\{n\mu\left(1-\sqrt{1- 2s}\right) \right\},
+$$
+et correspond à la FGM d'une loi $\text{IG}(n\mu, n^2\mu^2)$.
+\end{solution}
+\part[1] Donner, en justifiant, la loi de $V = tU$, pour $t>0$, où $U\sim\text{IG}(\mu, \mu^2)$ 
+\begin{solution}
+La densité de $V$ est donnée par 
+$$
+f_V(v) = \frac{\mu\sqrt{t}}{\sqrt{2\pi v^3}}\exp\left[-\frac{(v-t\mu)^2}{2vt}\right]
+$$
+et correspond à la densité d'une loi $\text{IG}(t\mu, t\mu^2)$
+\end{solution}
+\end{parts}
+\question[2] \textbf{Estimation paramétrique des paramètres de la loi inverse gaussienne}\\
+
+On souhaite calibrer un modèle Inverse gaussienne $\text{IG}(\mu,\mu^2)$ à notre historique de données
+$$(u_1,\ldots, u_n).$$ 
+ Donner l'expression et la loi de probabilité de l'estimateur $\widehat{\mu}$ de $\mu$ par la méthode des moments (en supposant que le modèle soit bien spécifié, c'est à dire que l'échantillon $(u_1,\ldots, u_n)$ est un échantillon iid de loi $\text{IG}(\mu,\mu^2)$).
+\begin{solution}
+$$
+\widehat{\mu} = \frac{1}{n}\sum_{i = 1}^{n}u_i\sim \text{IG}(\mu,n\mu^2)\text{ (en exploitant les question 1.c et 1.d)}
+$$
+\end{solution}
+% \part[2] Donner l'expression de l'estimateur $\tilde{\mu}$ de $\mu$ par la méthode du maximum de vraisemblance.
+% \begin{solution}
+% La log vraisemblance s'écrit
+% $$
+% l(u|\mu) = n\ln(\mu)-n\ln(\sqrt{2\pi})-\frac{3}{2}\sum\ln(u_i)-\sum\frac{(u_i- \mu)^2}{2u_i}
+% $$
+% On dérive par rapport à $\mu$ pour obtenir
+% $$
+% \frac{\text{d}l(u|\mu)}{\text{d}\mu} = \frac{n}{\mu}+n-\mu\sum\frac{1}{u_i}
+% $$
+% On vérifie que la dérivée seconde est négative. L'estimateur du maximum de vraisemblance est l'unique solution positive de l'équation 
+% $$
+% \mu^2\sum\frac{1}{u_i}-n\mu-n = 0
+% $$
+% soit 
+% $$
+% \tilde{\mu} = \frac{n+\sqrt{n^2+4n\sum1/u_i}}{2\sum1/u_i}
+% $$
+% \end{solution}
+\question[2] \textbf{Pros and cons de la distribution inverse gaussienne}\\
+Quels sont selon vous les inconvénients/avantages de cette loi inverse Gaussienne pour modéliser des montants de sinistres?
+\begin{solution}
+Avantage
+\begin{itemize}
+	\item Stabilité par convolution, une somme de variables aléatoires de loi inverse gaussienne suit une loi inverse gaussienne
+	\item Estimation simple via la méthode des moments, de plus la loi de l'estimateur est connu ce qui est pratique pour la construction d'intervalle de confiance.  
+\end{itemize}
+Inconvénient
+\begin{itemize}
+	\item La loi inverse gaussienne est une distribution à queue légère, ce qui peut être génant pour la modélisation des sinistres de forte intensité.
+\end{itemize}
+\end{solution}
+
+\question \textbf{Modèle individuel avec des montants de sinistres de loi inverse gaussienne}\\
+
+Soit un portefeuille de contrats contenant $n$ polices d'assurance. On suppose qu'au cours d'une période d'exercice, l'assuré $i\in\{1,\ldots, n\}$ a une probabilité $p_i\in(0,1)$ de subir un sinistre (pas plus de un sinistre par période d'exercice). Le montant de l'indemnisation pour un sinistre est modélisé via une loi Inverse Gaussienne $\text{IG}(\mu,\mu^2)$ (même distribution indépendamment du contrat sinistré).
+
+\begin{parts}
+\part[1] Spécifier l'expression de la charge totale du portefeuille $X_{\text{ind}}$ suivant un modèle individuel pour le portefeuille considéré sur une période d'exercice (Ecrire la variable aléatoire en fonction de variables aléatoires auxiliaires et rappeler les hypothèses sous-jacentes)
+\begin{solution}
+Voir le cours
+\end{solution}
+\part[1] Calculer, en justifiant le raisonnement, la probabilité $\mathbb{P}(X_\text{ind} = 0)$ en fonction des $p_i$.
+\begin{solution}
+$$\mathbb{P}(X_\text{ind} = 0) =\prod_{i = 1}^{n}(1-p_i)$$
+\end{solution}
+\part[2] Donner l'expression de la fonction génératrice des moments de $X_{\text{ind}}$ dans la situation décrite dans l'énoncé.
+\begin{solution}
+Voir le cours. 
+\end{solution}
+\part[1] On suppose maintenant que $p_i = p$ pour tout $i\in\{1,\ldots, n\}$. Le modèle individuel devient alors un modèle collectif $X_\text{col}$. Donner les caractéristiques de ce modèle collectif en termes de distribution de la fréquence et du montant des sinistres. 
+\begin{solution}
+On obtient un modèle collectif, avec 
+$$
+X_{\text{col}} = \sum_{k = 1}^{N}U_k
+$$
+où $N\sim\text{Bin}(n, p)$ et $U_k\overset{i.i.d.}{\sim}\text{IG}(\mu,\mu^2)$
+\end{solution}
+\part[2] Donner la moyenne et la variance de $X_{\text{col}}$, en fonction de $n,p$ et $\mu$.
+\begin{solution}
+On applique les formules du cours 
+$$
+\mathbb{E}(X_{\text{col}}) =\mathbb{E}(N)\mathbb{E}(U) = np\mu, 
+$$
+et
+$$
+\mathbb{V}(X_{\text{col}}) = \mathbb{E}(N)\mathbb{V}(U) + \mathbb{V}(N)\mathbb{E}(U)^2 = np\mu+ np(1-p)\mu^2
+$$ 
+\end{solution}
+\part[1] Détailler une méthode d'approximation numérique pour évaluer la fonction de répartition de $X_{\text{col}}$.
+\begin{solution}
+Voir le cours.
+\end{solution}
+\part[2] Donner l'expression de la fonction de répartition de $X_{\text{col}}$ en fonction de $n,p, \mu$ et $\overline{\phi}$ (fonction de survie de la loi normal $\mathcal{N}(0,1)$).
+\begin{solution}
+La loi de proba de $X_{\text{col}}$ s'écrit
+$$
+\mathbb{P}_X(A) = (1-p)^n\delta_0(A)+\int_Af_X^+(x)\text{d}\lambda(x)
+$$
+avec $A\in\mathcal{B}_{\mathbb{R}}$, et 
+\begin{eqnarray*}
+f_X^+(x) &=& \sum_{k = 1}^nf_{\sum_{i = 1}^kU_i}(x)\mathbb{P}(N = k)\\
+&=& \sum_{k = 1}^n\binom{n}{k}p^k(1-p)^{n-k}f_{\sum_{i = 1}^kU_i}(x)
+\end{eqnarray*}
+Comme $U_i\overset{i.i.d.}{\sim}\text{IG}(\mu,\mu^2)$ alors $\sum_{i = 1}^kU_i\sim\text{IG}(k\mu,k^2\mu^2)$, puis en intégrant sur $A = [0,x]$, il vient
+$$
+F_X(x) = (1-p)^n + \sum_{k = 1}^n\binom{n}{k}p^k(1-p)^{n-k}\left\{\overline{\phi}\left[\sqrt{\frac{k^2\mu^2}{x}}\left(1-\frac{x}{k\mu}\right)\right]+e^{2k\mu}\overline{\phi}\left[\sqrt{\frac{k^2\mu^2}{x}}\left(1+\frac{x}{k\mu}\right)\right]\right\}
+$$
+\end{solution}
+\end{parts}
+
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomial & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Geometric & $\Geom(p)$ & $(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ & $\frac{pe^t}{1-(1-p)e^t}$ pour  $t<-\ln(1-p)$\\
+\hline
+Uniform & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponential & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Normal & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+\bibliographystyle{plain}
+\bibliography{IG_distribution}
+\end{document}

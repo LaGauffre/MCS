@@ -1,0 +1,325 @@
+\documentclass[11pt, addpoints, answers]{exam}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin  = 1in]{geometry}
+\usepackage{amsmath, amscd, amssymb, amsthm, verbatim}
+\usepackage{mathabx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes,arrows}
+%%%<
+\usepackage{verbatim}
+%%%>
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usetikzlibrary{trees}
+
+\shadedsolutions
+\definecolor{SolutionColor}{RGB}{214,240,234}
+
+\newcommand{\bbC}{{\mathbb C}}
+\newcommand{\R}{\mathbb{R}}            % real numbers
+\newcommand{\bbR}{{\mathbb R}}
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\bbZ}{{\mathbb Z}}
+\newcommand{\bx}{\mathbf x}            % boldface x
+\newcommand{\by}{\mathbf y}            % boldface y
+\newcommand{\bz}{\mathbf z}            % boldface z
+\newcommand{\bn}{\mathbf n}            % boldface n
+\newcommand{\br}{\mathbf r}            % boldface r
+\newcommand{\bc}{\mathbf c}            % boldface c
+\newcommand{\be}{\mathbf e}            % boldface e
+\newcommand{\bE}{\mathbb E}            % blackboard E
+\newcommand{\bP}{\mathbb P}            % blackboard P
+
+\newcommand{\ve}{\varepsilon}          % varepsilon
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+%\renewcommand{\vec}[1]{\mathbf{#1}} % bold vectors
+\newcommand{\grad}{\nabla }
+\newcommand{\lb}{\langle }
+\newcommand{\rb}{\rangle }
+
+\def\Bin{\operatorname{Bin}}
+\def\Var{\operatorname{Var}}
+\def\Geom{\operatorname{Geom}}
+\def\Pois{\operatorname{Pois}}
+\def\Exp{\operatorname{Exp}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\def\Unif{\operatorname{Unif}}
+\def\No{\operatorname{N}}
+\newcommand{\E}{\mathbb E}            % blackboard E
+\def\th{\theta }            % theta shortcut
+\def\V{\operatorname{Var}}
+\def\Var{\operatorname{Var}}
+\def\Cov{\operatorname{Cov}}
+\def\Corr{\operatorname{Corr}}
+\newcommand{\epsi}{\varepsilon}            % epsilon shortcut
+
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert} %norm
+\providecommand{\abs}[1]{\left \lvert#1\right \rvert} %absolute value
+
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\ds}{\displaystyle}	% displaystyle shortcut
+
+\def\semester{2019-2020}
+\def\course{Modélisation Charge-Sinistre}
+\def\title{\MakeUppercase{Examen de deuxième session}}
+\def\name{Pierre-O Goffard}
+%\def\name{Professor Wildman}
+
+\setlength\parindent{0pt}
+
+\cellwidth{.35in} %sets the minimum width of the blank cells to length
+\gradetablestretch{2.5}
+
+%\bracketedpoints
+%\pointsinmargin
+%\pointsinrightmargin
+
+\begin{document}
+
+
+\runningheader{\course  \vspace*{.25in}}{}{\title \vspace*{.25in}}
+%\runningheadrule
+\runningfooter{}{Page \thepage\ of \numpages}{}
+
+% \firstpageheader{Name:\enspace\hbox to 2.5in{\hrulefill}\\  \vspace*{2em} Section: (circle one) TR: 3-3:50 \textbar\, TR: 5-5:50 \textbar\,  TR: 6-6:50(Xu) \textbar\,  TR: 6-6:50 }{}{Perm \#: \enspace\hbox to 1.5in{\hrulefill}\\ \vspace*{2em} Score:\enspace\hbox to .6in{\hrulefill} $/$\numpoints}
+\extraheadheight{.25in}
+
+\hrulefill
+
+\vspace*{1em}
+
+% Heading
+{\center \textsc{\Large\title}\\
+	\vspace*{1em}
+	\course -- \semester\\
+	Pierre-O Goffard\\
+}
+\vspace*{1em}
+
+\hrulefill
+
+\vspace*{2em}
+
+\noindent {\bf\em Instructions:} On éteint et on range son téléphone.
+\begin{itemize}
+	\item La calculatrice et les appareils éléctroniques ne sont pas autorisés.
+	\item Vous devez justifier vos réponses de manière claire et concise.
+	\item Vous devez écrire de la manière la plus lisible possible. Souligner ou encadrer votre réponse finale.
+	\item Document autorisé: Une feuille recto-verso manuscrite. 
+\end{itemize}
+
+\begin{center}
+	\gradetable[h]
+\end{center}
+
+\smallskip
+
+\section*{Une loi binomiale mélange beta}
+\begin{questions}
+\question Sur une période d'exercice donnée, le nombre de sinistres est modélisé par une variable aléatoire de loi $N\sim\text{Binomial}(n,\Theta)$ où $\Theta\sim\text{Beta}(a,b)$. On rappelle que la loi de probabilité d'une variable aléatoire N de loi binomiale $\text{Binomial}(n,p)$ est donnée par 
+$$
+\mathbb{P}(N = k)=\binom{n}{k}p^k(1-p)^{n-k},\text{ }k=0,\ldots, n.
+$$
+On rappelle que la loi de probabilité d'une variable aléatoire $\Theta\sim\text{Beta}(a,b)$ admet une densité 
+$$
+f_{\Theta}(\theta)=\frac{\theta^{a-1}(1-\theta)^{b-1}}{B(a,b)}\mathbb{I}_{[0,1]}(\theta),
+$$
+par rapport à la mesure de Lebesgue. La fonction beta  est définie par 
+$$
+B(a,b)=\int_{0}^{1}u^{a-1}(1-u)^{b-1}\text{d}u
+.$$
+\begin{parts}
+\part Donner la loi de probabilité de $N$ en fonction de la fonction beta.
+\begin{solution}
+\begin{eqnarray*}
+\mathbb{P}(N=k) &=& \int_{0}^1 \binom{n}{k}\theta^k(1-\theta)^{n-k}\frac{\theta^{a-1}(1-\theta)^{b-1}}{B(a,b)}\text{d}\theta\\
+&=&\binom{n}{k}\frac{B(k+a,n-k+b)}{B(a,b)}
+\end{eqnarray*}
+pour $k = 0,\ldots, n$.
+\end{solution}
+\part Donner une expression de $\mathbb{E}(N)$ en fonction de $a,b$, et $n$.\\
+\underline{Indications:} La fonction beta s'exprime en fonction de la fonction gamma de la façon suivante 
+$$
+B(a,b)=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}
+$$
+On rappelle que la fonction gamma est définie par 
+$$
+\Gamma(z)=\int_{0}^{+\infty}e^{-t}t^{z-1}\text{d}t,\text{ }z>0.
+$$
+et vérifie en particulier $\Gamma(z+1)=z\Gamma(z)$.
+\begin{solution}
+$\mathbb{E}(N) = \mathbb{E}\mathbb{E}(N|\Theta))=n\mathbb{E}(\Theta)=n\frac{a}{a+b}$
+\end{solution}
+\part Calculer la variance $V(N)$.
+\begin{solution}
+\begin{eqnarray*}
+V(N)&=&E(V(N|\Theta))+V(E(N|\Theta))\\
+&=&nE(\Theta(1-\Theta))+n^2V(\Theta)\\
+&=&n\frac{ab}{(a+b+1)(a+b)}+n^2\frac{ab}{(a+b+1)(a+b)^2}\\
+&=&\frac{nab(a+b+n)}{(a+b+1)(a+b)^2}.
+\end{eqnarray*}
+\end{solution}
+\part Donner une méthode d'estimation pour les paramètres de $N$, en supposant que le paramètre $n$ soit connu. Détailler la mise en oeuvre.  
+\begin{solution}
+Comme on vient de calculer la moyenne et la variance, on propose d'estimer $a$ et $b$ via la méthode des moments. On obtient 
+$$
+\widehat{a}= \frac{\bar N(n-\bar N)- S_N^2}{n(S_N^2/\bar N-1)+\bar N} ,\widehat{b} = \frac{(\bar N(n-\bar N)- S_N^2)(n-\bar N)}{\bar N(n(S_N^2/\bar X-1)+\bar N)}
+$$
+où $\bar N$ et $S_{N}^2$ désigne la moyenne et la variance empirique respectivement.
+\end{solution}
+\part La loi de $N$ appartient-elle à la famille de Panjer?
+\begin{solution}
+Non, il ne s'agit ni de la loi binomial, binomial négative ou Poisson.
+\end{solution}
+\end{parts}
+
+\question Sur une période d'exercice donnée, la charge totale de sinistres est modélisée via un modèle collectif 
+$$
+X = \sum_{k=1}^N U_k,
+$$
+où le nombre de sinistres est une variable aléatoire de comptage de fonction de masse donnée par 
+$$
+\mathbb{P}(N=k)=p(1-p)^{k-1},\text{ }k\geq1
+$$
+et les montants de sinistres sont iid de loi exponentielle de densité de probabilité
+$$
+f_U(x) = \frac{e^{-x/\beta}}{\beta}\mathbb{I}_{(0,+\infty)}(x).
+$$
+ \begin{parts}
+\part[2] Donner la moyenne et la variance de $X$.
+\begin{solution}
+$$
+\mathbb{E}(X)=\mathbb{E}(N)\mathbb{E}(U)=\frac{\beta}{p}. 
+$$
+et 
+$$
+\mathbb{V}(X)=\mathbb{E}(N)\mathbb{V}(U)+ \mathbb{V}(N)\mathbb{E}(U)^2=\frac{\beta^2}{p^2}. 
+$$
+\end{solution}
+\part[1] Donner la fonction génératrice des moments de $X$. Vous devez détailler les calculs.
+\begin{solution}
+$$
+M_X(s) = \mathbb{E}(e^{sX})=G_N(M_U(s))=\frac{1}{1-\frac{\beta s}{p}}
+$$
+\end{solution}
+\part[2] Donner la loi de probabilité de $X$. 
+\begin{solution}
+Il s'agit d'une loi exponentielle de paramètre $\beta/p$ par identification avec la fonction génératrice des moments calculer à la question précédente. Si on ne remarque pas ça, alors la densité de $X$ s'écrit 
+$$
+f_X(x)=\sum_{k=1}^{+\infty}p(1-p)^{k-1}f_U^{\ast k}(x) = \sum_{k=1}^{+\infty}p(1-p)^{k-1}\frac{e^{-x/\beta}x^{k-1}}{\beta^k k!}=\frac{p}{\beta}e^{-xp/\beta},
+$$
+ou $f_U^{\ast k}$ est le produit de convolution de rang $k$ de $f_U$ avec elle-même, il s'agit donc de la densité de la loi gamma de paramètres $k$ et $\beta$.
+\end{solution}
+\part[1] Supposons que nous n'observons que les charges totales de sinistres $x_1,\ldots,x_t$ et les nombres de sinistres $n_1,\ldots, n_t$ associées à $t$ périodes d'exercice. Proposer une méthode d'estimation des paramètres $p$ et $\beta$ basée sur les observations $x_1,\ldots, x_t$ et $n_1,\ldots, n_t$. Expliquer la mise en oeuvre, donner l'expression des estimateurs si possible. 
+\begin{solution}
+Le plus simple est de commencer par estimer $p$ en utilisant les nombres de sinistre $n_1,\ldots, n_t$, avec la méthode des moment, il vient $\widehat{p} = \left(\frac{1}{t}\sum_{s=1}^{t}n_s\right)^{-1}$, puis estimer $\beta$ via la méthode des moments avec $\widehat{\beta}=\widehat{p}\frac{1}{t}\sum_{s=1}^{t}x_s$.
+\end{solution}
+\end{parts}
+\question Les montants de sinistres sont modéliser par une loi gamma $\text{Gamma}(k,m)$, $k,m>0$ de densité de probabilité 
+$$
+f_{\text{Gam}}(x)=\frac{e^{-x/m}x^{k-1}}{m^k\Gamma(k)}\mathbb{I}_{(0,+\infty)}(x),
+$$
+On rappelle que la fonction gamma est définie par 
+$$
+\Gamma(z)=\int_{0}^{+\infty}e^{-x}x^{z-1}\text{d}x.
+$$
+et vérifie en particulier $\Gamma(z+1) = z\Gamma(z)$. 
+\begin{parts}
+\part[1] Donner l'espérance et la variance des montants de sinistres en fonction de $k$ et $m$. 
+\begin{solution}
+$\mathbb{E}(U) = km\text{ et }\mathbb{V}(U) = km^2$
+\end{solution}
+\part[1] Donner la fonction génératrice des moments de la loi des sinistres.
+\begin{solution}
+$M_U(s) = \left(\frac{1}{1-ms}\right)^k$
+\end{solution}
+\part[2] Proposer une méthode d'estimation pour les paramètres $k$ et $m$. Donner l'expression des estimateurs pour un échantillon de montant de sinistres $u_1,\ldots, u_n$. 
+\begin{solution}
+On utilise la méthode des moments 
+$$
+\widehat{k}=\frac{\bar{U}^2}{S_U^2},\text{ }\widehat{m}=\frac{S_U^2}{\bar{U}}
+$$
+où $\bar U$ et $S_U^2$ désigne la moyenne et la variance empirique de l'échantillon de montants de sisnitres 
+\end{solution}
+\part[2] Pour affiner la modéliser du montant des sinistres, on associe à la loi gamma une loi de Pareto de densité
+$$
+f_{\text{Par}}(x) =\begin{cases}
+\frac{\theta^\alpha\alpha}{x^{\alpha+1}},&x>\theta,\\
+0,&\text{sinon.}
+\end{cases} 
+$$
+pour modéliser les sinistres plus conséquents dans le cadre d'un modèle composite. Les conditions de régularité de la densité $f$ du modèle composite impose de fixer la valeur de certains paramètres. Donner l'expression du paramètre $m$ (de la loi gamma) et du paramètre de mélange $r$ du modèle composite en fonction des autres paramètres $k,\alpha $et $\theta$, de la fonction de répartition $F_{\text{Gam}}$ d'une loi gamma de paramètres $k$ et $m$ et la fonction gamma $\Gamma$.
+\begin{solution}
+La densité du modèle composite Gamma-Pareto est donnée par 
+$$
+f(x) = 
+\begin{cases}
+r\frac{f_{\text{gam}}(x)}{F_{\text{Gam}}(\theta)}&x\leq\theta\\
+(1-r)f_{\text{Par}}(x)&x>\theta
+\end{cases}
+$$
+les conditions de régularité $f(\theta^-)=f(\theta^+)$ et $f'(\theta^-)=f'(\theta^+)$ entraine
+$$
+\frac{r}{1-r} = \frac{f_{\text{Par}}(\theta)F_{\text{Gam}}(\theta)}{f_{\text{Gam}}(\theta)}
+$$
+de plus $f'_{Gam}(x) = f_{\text{Gam}}(x)\left[\frac{k-1}{x}-\frac{1}{m}\right]$ et $f'_{Par}(x)=-\frac{\alpha+1}{x}f_{Par}(x)$ On en déduit que 
+$$
+m = \frac{\theta}{k+\alpha},\text{ }r = \frac{\alpha\Gamma(k) F_{\text{Gam}}(\theta)e^{k+\alpha}(k+\alpha)^{-k}}{1+\alpha\Gamma(k) F_{\text{Gam}}(\theta)e^{k+\alpha}(k+\alpha)^{-k}}.
+$$
+\end{solution}
+
+\end{parts}
+
+\end{questions}
+%-------------------------------TABLE-------------------------------
+\newpage
+\hrule
+\vspace*{.15in}
+\begin{center}
+  \large\MakeUppercase{Formulaire}
+\end{center}
+\vspace*{.15in}
+\hrule
+\vspace*{.25in}
+
+\renewcommand\arraystretch{3.5}
+\begin{table}[H]
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|}
+
+\hline
+Nom & abbrev. & Loi & $\E(X)$ & $\Var(X)$ & FGM\\
+\hline\hline
+Binomiale & $\Bin(n,p)$ & $\binom{n}{k}p^k(1-p)^{n-k}$ pour $k = 0,\ldots,n$ & $np$ & $np(1-p)$ & $[(1-p)+pe^t]^n$\\
+\hline
+Poisson & $\Pois(\lambda)$ & $e^{-\lambda}\dfrac{\lambda^k}{k!}$ pour $k = 0,1,2,\ldots$ & $\lambda$ & $\lambda$ &$ \exp(\lambda(e^t-1))$\\
+\hline
+Binomiale Négative & $\mathcal{NB}(\alpha, p)$ & $\frac{\Gamma(\alpha+k)}{\Gamma(k+1)\Gamma(a)}(1-p)^{\alpha}p^k$ & $\dfrac{\alpha p }{1-p}$ & $\dfrac{\alpha p }{(1-p)^2}$ & $\left(\frac{1-p}{1-pe^t}\right)^\alpha$ pour  $t<-\ln(p)$\\
+\hline
+Uniforme & $\Unif(a,b)$ & $\begin{cases} \dfrac{1}{b-a} & a\leq t\leq b\\ 0 & \text{sinon}\end{cases}
+$ & $\dfrac{a+b}{2}$ & $\dfrac{(b-a)^2}{12}$ & $\frac{e^{tb}-e^{ta}}{t(b-a)}$\\
+\hline
+Exponentielle & $\Exp(\lambda)$ & $\begin{cases} \lambda e^{-\lambda t} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{1}{\lambda}$ & $\dfrac{1}{\lambda^2}$ & $\frac{\lambda}{\lambda -t}$ pour $t<\lambda$\\
+\hline
+Gamma & $\text{Gamma}(\alpha,\beta)$ & $\begin{cases} \frac{\beta^\alpha t^{\alpha-1} e^{-\beta t}}{\Gamma(\alpha)} & t\geq 0 \\ 0 & t<0\end{cases}$ & $\dfrac{\alpha}{\beta}$ & $\dfrac{\alpha}{\beta^2}$ & $\left(\frac{\beta}{\beta -t}\right)^\alpha$ pour $t<\beta$\\
+\hline
+Normale & $\No(\mu,\sigma^2)$ & $\left(\dfrac{1}{\sqrt{2\pi\sigma^2}}\right)\operatorname{exp}{\left(\dfrac{-(t-\mu)^2}{2\sigma^2}\right)}$ & $\mu$ & $\sigma^2$ & $e^{\mu t}e^{\sigma^2t^2/2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+On rappelle la définition de la fonction Gamma avec 
+$$
+\Gamma(z) = \int_{0}^{+\infty}x^{z-1}e^{-x}\text{d}x.
+$$
+On note que pour $z\in \mathbb{N}$ alors $\Gamma(z) = (z-1)!$.
+\end{document}

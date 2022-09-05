@@ -1,0 +1,13 @@
+\beamer@sectionintoc {1}{D\IeC {\'e}finition du mod\IeC {\`e}le collectif}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Distribution de $X$}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Moments de $X$}{6}{0}{1}
+\beamer@sectionintoc {2}{Mod\IeC {\`e}le pour la fr\IeC {\'e}quence des sinistres}{9}{0}{2}
+\beamer@sectionintoc {3}{Mod\IeC {\`e}les pour les montants de sinistres}{18}{0}{3}
+\beamer@subsectionintoc {3}{1}{Les lois classiques}{18}{0}{3}
+\beamer@subsectionintoc {3}{2}{Les lois composites}{25}{0}{3}
+\beamer@subsectionintoc {3}{3}{Les lois flexibles}{29}{0}{3}
+\beamer@sectionintoc {4}{M\IeC {\'e}thode d'approximation}{34}{0}{4}
+\beamer@subsectionintoc {4}{1}{Approximation Normale et Gamma}{34}{0}{4}
+\beamer@subsectionintoc {4}{2}{Algorithme de Panjer}{36}{0}{4}
+\beamer@subsectionintoc {4}{3}{Fast Fourier Transform}{38}{0}{4}
+\beamer@subsectionintoc {4}{4}{D\IeC {\'e}veloppement polynomial}{40}{0}{4}

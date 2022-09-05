@@ -1,0 +1,450 @@
+\documentclass[8pt,notheorems]{beamer}
+\usetheme{Copenhagen}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\usepackage{tkz-graph}
+\usepackage{color}
+\usepackage{listings}
+
+\usepackage{amsmath,amsfonts,amsthm,t1enc}
+\usepackage{fourier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{decorations.text}
+
+\usetikzlibrary{automata,arrows,positioning,calc}
+\setbeamertemplate{footline}{\hfill \insertframenumber/\inserttotalframenumber}
+\def \si {\sigma}
+\def \la {\lambda}
+\def \al {\alpha}
+% \def\e*{\end{eqnarray*}}
+\def \di{\displaystyle}
+
+\def \E{\mathbb E}
+\def \N{\mathbb N}
+\def \Z{\mathbb Z}
+\def \NZ{\mathbb{N}_0}
+\def \I{\mathbb I}
+\def \w{\widehat}
+\def \P {\mathbb P}
+\def \V{\mathbb V}
+
+
+\newcommand{\CL}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\nat}{{\mathbb N}}
+\newcommand{\Laplace}{\mathscr{L}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ve}{\bm{\mathrm{e}}} % vector e
+
+\renewcommand{\L}{\mathcal{L}} % e.g. L^2 loss.
+
+\newcommand{\ih}{\mathrm{i}}
+\newcommand{\oh}{{\mathrm{o}}}
+\newcommand{\Oh}{{\mathcal{O}}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\va}{\textbf{v.a.}}
+\newcommand{\iid}{\textbf{i.i.d.}}
+
+\newcommand{\Norm}{\mathcal{N}}
+\newcommand{\LN}{\mathcal{LN}}
+\newcommand{\SLN}{\mathcal{SLN}}
+
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Ind}{\mathbb I}
+\newcommand\bfsigma{\bm{\sigma}}
+\newcommand\bfSigma{\bm{\Sigma}}
+\newcommand\bfLambda{\bm{\Lambda}}
+\newcommand{\stimes}{{\times}}
+\def \limsup{\underset{n\rightarrow+\infty}{\overline{\lim}}}
+\def \liminf{\underset{n\rightarrow+\infty}{\underline{\lim}}}
+
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+%\makeatletter
+%\def\th@mystyle{%
+%    \normalfont % body font
+%    \setbeamercolor{block title example}{bg=orange,fg=white}
+%    \setbeamercolor{block body example}{bg=blue!20,fg=black}
+%    \def\inserttheoremblockenv{block}
+%  }
+%\makeatother
+%\theoremstyle{mystyle}
+
+\makeatletter
+    \ifbeamer@countsect
+      \newtheorem{theorem}{\translate{Theorem}}[section]
+    \else
+      \newtheorem{theorem}{\translate{Theorem}}
+    \fi
+    \newtheorem{corollary}{\translate{Corollary}}
+    \newtheorem{prop}{\translate{Proposition}}
+    \newtheorem{lemma}{\translate{Lemma}}
+    \newtheorem{problem}{\translate{Problem}}
+    \newtheorem{remark}{\translate{Remark}}
+    \newtheorem{solution}{\translate{Solution}}
+
+    \theoremstyle{definition}
+    \newtheorem{definition}{\translate{Definition}}
+    \newtheorem{definitions}{\translate{Definitions}}
+
+    \theoremstyle{example}
+    \newtheorem{example}{\translate{Example}}
+    \newtheorem{examples}{\translate{Examples}}
+
+\makeatletter
+\def\th@mystyle{%
+    \normalfont % body font
+    \setbeamercolor{block title example}{bg=orange,fg=white}
+    \setbeamercolor{block body example}{bg=orange!20,fg=black}
+    \def\inserttheoremblockenv{exampleblock}
+  }
+\makeatother
+\theoremstyle{mystyle}
+\newtheorem{fact}{Fact}
+
+
+
+
+
+
+    % Compatibility
+    \newtheorem{Beispiel}{Beispiel}
+    \newtheorem{Beispiele}{Beispiele}
+    \theoremstyle{plain}
+    \newtheorem{Loesung}{L\"osung}
+    \newtheorem{Satz}{Satz}
+    \newtheorem{Folgerung}{Folgerung}
+    \newtheorem{Fakt}{Fakt}
+    \newenvironment{Beweis}{\begin{proof}[Beweis.]}{\end{proof}}
+    \newenvironment{Lemma}{\begin{lemma}}{\end{lemma}}
+    \newenvironment{Proof}{\begin{proof}}{\end{proof}}
+    \newenvironment{Theorem}{\begin{theorem}}{\end{theorem}}
+    \newenvironment{Problem}{\begin{problem}}{\end{problem}}
+    \newenvironment{Corollary}{\begin{corollary}}{\end{corollary}}
+    \newenvironment{Example}{\begin{example}}{\end{example}}
+    \newenvironment{Examples}{\begin{examples}}{\end{examples}}
+    \newenvironment{Definition}{\begin{definition}}{\end{definition}}
+\makeatother
+
+
+
+
+
+
+
+
+
+
+
+% ============================================================
+% Title
+% ============================================================
+
+\title[]{Modélisation Charge Sinistre M2 Actuariat}
+\subtitle{Chapitre IV: Inférence d'une distribution composée}
+\author{Pierre-Olivier Goffard}
+\institute{
+	   Université de Lyon 1\\
+	ISFA\\
+	   \texttt{pierre-olivier.goffard@univ-lyon1.fr}
+	  }
+\date{
+ISFA\\
+\today}
+\lstset{language=SAS}
+\begin{document}
+
+\frame{\titlepage}
+
+
+% ============================================================
+\section{Problème}
+\begin{frame}[allowframebreaks]
+\underline{I. Problème}\\ 
+Soit une variable aléatoire de la forme 
+$$
+X =\sum_{i=1}^N U_i
+$$
+où
+\begin{itemize}
+    \item $N$ est une variable aléatoire de comptage de fonction de masse $p_N(\cdot,\theta_{N})$
+    \item $(U_i)$ est une suite de variables aléatoires iid de fonction de densité $f_U(\cdot,\theta_{U})$
+\end{itemize}
+Soient $x_1,\ldots, x_t$ un échantillons d'observations iid de $X$ sur $t$ période d'exercice.
+\begin{problem}
+ Comment inférer la valeur des paramètres $\theta = (\theta_{N},\theta_U)$? 
+\end{problem}
+\begin{remark}
+Il s'agit d'un problème de données incomplètes, les données complètes comprennent les fréquences et montants individuels de sinistre
+$$
+(n_s,\mathbb{u}_s) = \{n_s,(u_{1,s},\ldots, u_{n_s,s})\},\text{ }s = 1,\ldots, t.
+$$
+Ce problème correspond à la décomposition d'une somme aléatoire \tiny
+\begin{thebibliography}{1}
+
+\bibitem{buchmann2003}
+Boris Buchmann and Rudolf Grübel.
+\newblock Decompounding: an estimation problem for {P}oisson random sums.
+\newblock {\em Ann. Statist.}, 31(4):1054--1074, 08 2003.
+\end{thebibliography} 
+\normalsize
+Il est étudié en actuariat 
+\tiny
+\begin{thebibliography}{1}
+\bibitem{Goffard2021}
+Pierre-Olivier Goffard and Patrick~J. Laub.
+\newblock Approximate bayesian computations to fit and compare insurance loss
+  models.
+\newblock {\em Insurance: Mathematics and Economics}, 100:350--371, sep 2021.
+\end{thebibliography} 
+\normalsize 
+ et dans la modélisation des précipitations.\tiny
+\begin{thebibliography}{1}
+\bibitem{Dunn2004}
+Peter~K. Dunn.
+\newblock Occurrence and quantity of precipitation can be modelled
+  simultaneously.
+\newblock {\em International Journal of Climatology}, 24(10):1231--1239, jul
+  2004.
+\end{thebibliography} 
+
+\end{remark}
+\begin{example}
+Supposons que $N\sim\text{Geom}(p)$ et $U\sim\text{Exp}(\lambda)$ avec 
+$$
+p_{N}(k) = (1-q)q^k,\text{ }k\geq0\text{, et }f_U(x) =  e^{- x/\delta}/\delta,\text{ }x\geq0.
+$$
+\end{example}
+
+\end{frame}
+\section{Approche fréquentiste}
+\subsection{Méthode des moments}
+\begin{frame}[allowframebreaks]
+\underline{II. Approche fréquentiste}\\
+\underline{1. Méthode des moments}\\
+
+La méthode des moments consiste à faire matcher les moments théopriques et les moments théoriques en résolvant le système $$
+\mathbb{E}(X^k) = \mu_k,\text{ }k\geq1
+$$ 
+où les $\mu_k$ désignent les moments empiriques
+$$
+\mu_k = \frac{1}{n}\sum_{j = 1}^nx_j
+$$
+Dans notre exemple $X\sim\text{Geom}(p)-\text{Exp}(\lambda)$, seuls les moments jusqu'à l'ordre 2 sont nécessaires. On résout donc 
+\begin{equation}\label{eq:mme_system}
+\begin{cases}
+\overline{X} =\mathbb{E}(X), \\
+S_n^2 =\mathbb{V}(X) ,
+\end{cases}
+\end{equation}
+où $\overline{X} = \frac{1}{n}\sum_{j = 1}^n x_i$ et $S_n^2 = \frac{1}{n-1}\sum(x_i-\overline{X})^2$. On a 
+$$
+\mathbb{E}(X) = \frac{q \delta}{(1-q)}\text{ et }\mathbb{V}(X) =\frac{q\delta^2}{1-q}+\frac{q\delta^2}{(1-q)^2}. 
+$$
+Le système \eqref{eq:mme_system} est équivalent à 
+\begin{equation}\label{eq:mme_nl_system}
+\begin{cases}
+\overline{X} = \frac{q \delta}{(1-q)}\\
+S_n^2 = \frac{q\delta^2}{1-q}+\frac{q\delta^2}{(1-q)^2}
+\end{cases}
+\end{equation}
+Le système \eqref{eq:mme_nl_system} d'inconnu $q$ et $\delta$ est non-linéaire. 
+\begin{itemize}
+    \item Solution pas forcément unique
+    \item Il faut prendre en compte les contrainte $0< q <1$ et $\delta >0$
+    \item Variance empirique assez volatile
+\end{itemize}
+Estimation alternative en exploitant le nombre de zéros dans les données:
+$$
+\widehat{q} = 1 -  \frac{t_0}{t}\text{ et }\widehat{\delta} = \frac{(1-\widehat{q})\overline{X}}{\widehat{q}},
+$$
+où $t_0$ correspond au nombre de zéros dans les données.
+\begin{remark}
+ Les estimateurs sont consistants, ils ne sont pas viables si les données ne comprenent pas de zéro ou que des zéros.
+\end{remark}
+\end{frame}
+\subsection{Maximum de vraisemblance}
+\begin{frame}[allowframebreaks]
+\underline{2. Maximum de vraisemblance}\\
+La distribution de $X$ est mixte au sens ou 
+$$
+\text{d}\mathbb{P}_X(x) = \mathbb{P}(N = 0)\text{d}\delta_0(x) + \sum_{n = 1}^{+\infty}f_U^{\ast n}(x)\mathbb{P}(N = n)\text{d}\lambda(x)= \mathbb{P}(N = 0)\text{d}\delta_0(x) + f^+_X(x)\text{d}\lambda(x).
+$$
+Dans le cadre de notre modèle, nous avons 
+$$
+\mathbb{P}(N = 0) = 1-q\text{, et }f^+_X(x) =\frac{q(1-q)}{\delta}\exp\left(-x\frac{1-q}{\delta}\right)
+$$
+La vraisemblance s'écrit
+$$
+L(\mathbf{x};\theta) = (1-q)^{t_0}\left(\frac{q(1-q)}{\delta}\right)^{t-t_0}\exp\left[-\frac{1-q}{\delta}\sum_{i = 1}^{t-t_0}x_i^+\right],
+$$
+où $x_1^+,\ldots, x_{t-t_0}^+$ sont les observations strictement positives. On cherche les valeurs de $\delta$ et $q$ qui maximize la log vraisemblance 
+$$
+l(\mathbf{x};\theta)=t\ln(1-q) + (t-t_0)\ln(q)-(t-t_0)\ln(\delta) -\frac{1-q}{\delta}\sum_{i = 1}^{t-t_0}x_i^+, 
+$$
+avec 
+$$
+(\widehat{q},\widehat{\delta}) = \underset{q\in(0,1),\text{ }\delta>0}{\text{argmax}} l(\mathbf{x}; q,\delta)
+$$
+On résout le système 
+\begin{equation}\label{eq:mle_system}
+\begin{cases}
+\frac{\partial l}{\partial q}=0\\
+\\
+\frac{\partial l}{\partial \delta}=0
+\end{cases}
+\end{equation}
+On a
+$$
+\frac{\partial l}{\partial q} = -\frac{t}{1-q}+\frac{t-t_0}{q}+\frac{1}{\delta}\sum_{s=1}^{t-t_0}x_{s}^+,\text{ et }\frac{\partial l}{\partial \delta} =- \frac{t-t_0}{\delta}+\frac{1-q}{\delta^2}\sum_{s=1}^{t-t_0}x_{s}^+.
+$$
+et 
+$$
+\widehat{q} = \frac{t-t_0}{t},\text{ et }\widehat{\delta} = \frac{t_0}{t}\frac{1}{t-t_0}\sum_{s=1}^{t-t_0}x_{s}^+.
+$$
+\end{frame}
+\section{Approche Bayésienne}
+\begin{frame}
+\underline{III. Approche Bayésienne}\\
+L'inférence Bayésienne repose sur le calcul de la loi a posteriori
+\begin{equation}\label{eq:a_posteriori}
+p(\theta|\mathbf{x}) = \frac{L(\mathbf{x};\theta)p(\theta)}{\int L(\mathbf{x};\theta)p(\theta)\text{d}\theta} = \frac{L(\mathbf{x};\theta)p(\theta)}{L(\mathbf{x})},
+\end{equation}
+du paramètre $\theta$ sachant les données $\mathbb{x}$ via la mise à jour de la loi a priori $p(\theta)$ par la fonction de vraisemblance $L(\mathbf{x};\theta)$. 
+\begin{problem}
+La constante de normalisation $L(\mathbf{x})$, aussi appelée vraisemblance marginale, ne prend que très rarement une forme analytique. 
+\end{problem}
+\begin{remark}
+L'inférence se fait généralement sur la base d'un échantillon tiré depuis la loi a posteriori en utilisant un algorithme de type \textit{Markov Chain Monte Carlo} (MCMC). 
+\end{remark}
+\end{frame}
+\subsection{Metropolis Hasting}
+\begin{frame}
+\underline{1. Metropolis-Hasting}\\
+
+
+Pour $i=1,...,I$
+\begin{enumerate}
+\item Initialisation ($i = 1$) par exemple $\theta_1\sim p(\theta)$ sinon Etape 2
+\item Perturbation $\theta^\ast = \theta_i + \epsilon$, avec $\epsilon\sim\text{M-Normal}(0,\Sigma)$
+\item Acceptation/Rejet, soit $U\sim\text{Unif([0,1])}$
+\begin{itemize}
+    \item Si $\min\left(1, \frac{L(\mathbf{x}|\theta^\ast)p(\theta^\ast)}{L(\mathbf{x}|\theta_i)p(\theta_i)}\right)> U$ acceptation et $\theta_{i+1} = \theta^\ast$ 
+    \item Sinon rejet et $\theta_{i+1} = \theta_i$
+\end{itemize}
+\end{enumerate}   
+Le résultat est un échantillon $\theta_1,\ldots, \theta_I$ distribué suivant la loi a posteriori. 
+\begin{remark}
+Il est nécessaire de choisir judicieusement le paramètre $\Sigma$ de la perturbation pour obtenir un algorithme efficace. 
+\end{remark}
+
+Prenons des lois a priori uniformes et indépendantes
+$$
+p(\theta) = p(q)\cdot p(\delta) =\frac{1}{b_q- a_q}\mathbb{I}_{[a_q,b_q]}(q)\times \frac{1}{b_\delta- a_\delta}\mathbb{I}_{[a_\delta,b_\delta]}(\delta)
+$$
+\end{frame}
+\subsection{Echantilloneur de Gibbs}
+\begin{frame}[allowframebreaks]
+\underline{2. Echantilloneur de Gibbs}\\
+Lorsque la dimension de l'espace des paramètres est plus grand que $1$ (deux dans notre cas), il est possible de simuler la loi a posteriori, soit la loi jointe $q,\delta|x$ composante par composante via l'algorithme suivant:\\
+
+Pour $i = 1,\ldots, I$
+\begin{enumerate}
+\item Si $i=1$ alors $(q_1,\delta_1)\sim p(q,\delta)$, sinon étape 2
+\item Simuler $q_{i+1}\sim p(q|\delta_i,x)$
+\item Simuler $\delta_{i+1}\sim p(\delta|q_{i+1},x)$
+\end{enumerate}
+
+Le résultat est une suite de réalisations $(q_1,\delta_1),\ldots, (q_I,\delta_I)$ d'une chaine de Markov dont la loi stationnaire est la loi a posteriori. 
+\begin{remark}
+Cette méthode d'échantillonage, dite de Gibbs, requiert la connaissance des lois conditionnelles de $q|\delta,x$ et $\delta|q,x$ qui sont potentiellement plus facile à déterminer que la loi a posteriori $p(q,\delta|x)$.
+\end{remark}
+\begin{example}
+Supposons que $\delta\sim \text{Inverse-Gamma}(\alpha,\beta)$ de densité 
+$$
+p(\delta) = \frac{\beta^\alpha e^{-\beta/\delta}}{\Gamma(\alpha)\delta^{\alpha+1}},\text{ pour }\delta>0. 
+$$
+La loi conditionnelle de $\delta|q,x$ est une loi inverse gamma avec
+$$
+\text{Inverse-Gamma}(t-t_0 + \alpha,(1-q)\sum x_i^+ + \beta )
+$$
+\end{example}
+La loi conditionelle $q|\delta,x$ n'admet pas une forme explicite la simulation de $q|\delta,x$ passe par un schéma de Metropolis Hasting avec 
+$$
+p(q|\delta, \mathbf{x}) = \frac{L(\mathbf{x}|q, \delta)p(q)}{\int L(\mathbf{x}|q, \delta)p(q)\text{d}q}.
+$$
+\end{frame}
+\subsection{Approximate Bayesian Computation}
+\begin{frame}[allowframebreaks]
+\underline{3. Estimation Bayésienne approchée}\\
+
+Lorsque la vraisemblance n'admet pas de forme analytique. On s'affranchit de la fonction de vraisemblance via des simulations. L'algorithme est le suivant:\\ 
+
+Tant que $i < I $
+\begin{enumerate}
+\item $\theta^\ast\sim p(\theta)$
+\item $\mathbf{x}^\ast\sim p(\mathbf{x}|\theta^\ast)$
+\item
+\begin{itemize} 
+    \item Si $D(\mathbf{x}, \mathbf{x}^\ast) <\epsilon$ alors $\theta_i =\theta^\ast$ et $i = i+1$
+    \item Sinon Etape 1
+\end{itemize}
+\end{enumerate}
+où $D(\cdot,\cdot)$ est une mesure de dissimilarité entre les données observées $\mathbf{x}$ et simulées $\mathbf{x}^\ast$. 
+\begin{remark}
+Le résultat est un échantillon distribué suivant la loi a posteriori approchée
+$$
+p_{abc}(\theta|\mathbf{x})=\frac{ \int_{\mathbb{R}^t}L(\mathbf{x}^\ast|\theta)\mathbb{I}_{D(\mathbf{x}, \mathbf{x^\ast}) <\epsilon}\text{d}\mathbf{x}^\ast p(\theta)}{\int_{\Theta}\int_{\mathbb{R}^t}L(\mathbf{x}^\ast|\theta)\mathbb{I}_{D(\mathbf{x}, \mathbf{x^\ast}) <\epsilon}\text{d}\mathbf{x}^\ast p(\theta)\text{d}\theta}
+$$
+La précision est liée au choix de $\epsilon$, il s'agit d'un compromis précision/temps de calcul.
+\end{remark}
+
+ Le paramètre important est la distance $D$ permettant la comparaison des données observées et simulées. 
+ \begin{remark}
+ Le choix d'une distance euclidienne 
+$$
+D(x,x^\ast) = \sqrt{\sum_{s = 1}^t(x_s - x_s^\ast)^2}
+$$
+conduit a ne jamais sélectionner de paramètre eu égard à une trop grande variance (pour de grands échantillons).
+\end{remark} 
+Une solution consiste à définir des résumés statistiques
+$$
+S:x\mapsto S(x)\in\mathbb{R}^{d},\text{ avec } d\leq t
+$$
+puis de mesurer la dissimilarité entre données observées et données simulées par $D[S(x),S(x^\ast)]$.
+\begin{remark} 
+L'utilisation de statistiques rajoute une approximation puisque la loi a posteriori approchée converge vers la loi des paramètres sachant $S(x)$ ce qui correspond à une perte d'information.
+\end{remark} 
+L'utilisation de statistique exhaustive permettent d'assurer la convergence vers la vraie loi a posteriori.
+\begin{definition} 
+Pour rappel, une statistique $S$ est exhaustive  la vraisemblance se décompose en deux fonctions $h$ et $g$ telles que
+$$
+L(x|\theta) = h(x)g(\theta,S(x)).
+$$
+\end{definition}
+\begin{example}
+Le modèle étudié admet les statistiques exhaustives suivantes
+$$
+t_0\text{ et }\sum_{i = 1}^t x_i.
+$$
+\end{example}
+
+\end{frame}
+\begin{frame}[allowframebreaks]{Références bibliographiques}
+
+\bibliographystyle{plain}
+\bibliography{MCS_notes}
+\end{frame}
+\end{document}
